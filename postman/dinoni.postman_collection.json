@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "7cb82c71-194c-4bf4-a550-9daa480831b5",
+		"name": "dinoni",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "allProductos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\":\"Samsung Galaxy\",\"descripcion\":\"Nuevo Samsung Galaxy\",\"precio\":3000000,\"cantidad\":11,\"categoria\":1,\"estado\":\"D\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/tienda/allProductos",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda",
+						"allProductos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveProducto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"prueba\",\r\n    \"descripcion\": \"Nuevo Iphone 14 Pro Max\",\r\n    \"precio\": 13000000,\r\n    \"cantidad\": 1,\r\n    \"categoria\": 1,\r\n    \"estado\": \"D\",\r\n    \"imagen\": \"https://www.apple.com/v/iphone-14-pro/a/images/meta/iphone-14-pro_overview__e2a7u9jy63ma_og.png?202210041411\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/tienda/saveProducto",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda",
+						"saveProducto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productosByName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/tienda/productos/nombre/Iphone14",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda",
+						"productos",
+						"nombre",
+						"Iphone14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productosById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/tienda/productos/id/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda",
+						"productos",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProducto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/tienda/deleteProducto/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda",
+						"deleteProducto",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProducto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/tienda/updateProducto/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda",
+						"updateProducto",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
