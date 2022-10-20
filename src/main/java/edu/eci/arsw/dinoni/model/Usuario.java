@@ -18,7 +18,7 @@ public class Usuario {
     private String identificacion;
     private String correo;
     private String passwd;
-    private int telefono;
+    private long telefono;
 
     public Usuario() {
     }
@@ -33,7 +33,7 @@ public class Usuario {
      * @param passwd
      * @param telefono
      */
-    public Usuario(long id, String nombre, String tipoIdentificacion, String identificacion, String correo, String passwd, int telefono) {
+    public Usuario(long id, String nombre, String tipoIdentificacion, String identificacion, String correo, String passwd, long telefono) {
         this.id = id;
         this.nombre = nombre;
         this.tipoIdentificacion = tipoIdentificacion;
@@ -52,7 +52,7 @@ public class Usuario {
      * @param passwd
      * @param telefono
      */
-    public Usuario(String nombre, String tipoIdentificacion, String identificacion, String correo, String passwd, int telefono) {
+    public Usuario(String nombre, String tipoIdentificacion, String identificacion, String correo, String passwd, long telefono) {
         this.nombre = nombre;
         this.tipoIdentificacion = tipoIdentificacion;
         this.identificacion = identificacion;
@@ -110,11 +110,11 @@ public class Usuario {
         this.passwd = passwd;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return this.telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
