@@ -16,7 +16,6 @@ public class Producto{
     private String descripcion;
     private int precio;
     private int cantidad;
-    private int categoria;
     private char estado; //D: Disponible, N: No Disponible, E: Eliminado
     private String imagen;
     
@@ -30,17 +29,15 @@ public class Producto{
      * @param descripcion
      * @param precio
      * @param cantidad
-     * @param categoria
      * @param estado
      * @param imagen
      */
-    public Producto(long id, String nombre, String descripcion, int precio, int cantidad, int categoria, char estado, String imagen) {
+    public Producto(long id, String nombre, String descripcion, int precio, int cantidad, char estado, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.categoria = categoria;
         this.estado = estado;
         this.imagen = imagen;
     }
@@ -51,15 +48,13 @@ public class Producto{
      * @param nombre
      * @param precio
      * @param cantidad
-     * @param Categoria
      * @param imagen
      */
-    public Producto(long id, String nombre, int precio, int cantidad, int Categoria, String imagen) {
+    public Producto(long id, String nombre, int precio, int cantidad, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.categoria = Categoria;
         this.descripcion = "";
         this.estado = 'D';
         this.imagen = imagen;
@@ -109,14 +104,6 @@ public class Producto{
         this.estado = estado;
     }
 
-    public int getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(int categoria) {
-        this.categoria = categoria;
-    }
-
     public String getImagen() {
         return imagen;
     }
@@ -134,7 +121,6 @@ public class Producto{
             ", descripcion='" + getDescripcion() + "'" +
             ", precio='" + getPrecio() + "'" +
             ", cantidad='" + getCantidad() + "'" +
-            ", categoria='" + getCategoria() + "'" +
             ", estado='" + getEstado() + "'" +
             ", imagen='" + getImagen() + "'" +
             "}";

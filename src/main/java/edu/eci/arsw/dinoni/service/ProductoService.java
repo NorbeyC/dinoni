@@ -78,7 +78,6 @@ public class ProductoService {
         temp.setDescripcion(producto.getDescripcion());
         temp.setPrecio(producto.getPrecio());
         temp.setCantidad(producto.getCantidad());
-        temp.setCategoria(producto.getCategoria());
         temp.setEstado(producto.getEstado());
         temp.setImagen(producto.getImagen());
         productoRepository.save(temp);
