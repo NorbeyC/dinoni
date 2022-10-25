@@ -35,8 +35,7 @@
                 <div class="imagen">
                     <img th:src="${producto.imagen}" class="imgp">
                     <div class="infoProducto">
-                        <a href=viewSelectedProduct.html th:href="@{viewSelectedProduct?(name=${producto.nombre})}"><b><p th:text="${producto.nombre}"></p></b></a>
-                        <b><p th:text="${producto.nombre}"></p></b>
+                        <a href=viewSelectedProduct.html th:href="@{viewSelectedProduct(name=${producto.nombre})}"><b><p th:text="${producto.nombre}"></p></b></a>
                         <p th:text="${producto.descripcion}"></p>
                         <p th:text="${producto.precio}"></p>
                     </div>

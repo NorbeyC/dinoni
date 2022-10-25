@@ -63,15 +63,27 @@
                             <option value=5>5</option>
                         </select>
                         <button> <i class="" >Añadir a carrito</i> </button> 
-                        <h4>Aqui van los comentarios</h4>
                     </div>
-                    <div class="coms" th:each="resena : ${resenas}">
+                    <div class="coms" >
                         <div class="res">
-                            <h3>Aqui van los comentarios</h3>
+                            <h5>Aqui van los comentarios</h5>
                             <div class="infoResenas">
-                                <p th:text="${resena.nombreUsuario}"></p>
-                                <p th:text="${resena.comentario}"></p>
+                                <p>Por alber hace 105 meses <br>
+                                    buen producto, como siempre<br>
+                                    <br>
+                                    Por zerodarck hace 105 meses<br>
+                                    Muchas gracias, este producto me ayudó un montón. Simple y funciona!<br>
+                                    <br>
+                                    Por Natalia hace 87 meses<br>
+                                    Cumple con lo ofrecido!<br>
+                                </p>
                             </div>
+                        </div>
+                        <div class="insertCom">
+                            <form id="insertRes">
+                                <input id = 'resena'  name="resena" type="text" placeholder="Opina sobre este producto">
+                                <button> <i class="" >Enviar</i> </button>
+                            </form>
                         </div>
                     </div>
                 </div>
