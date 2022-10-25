@@ -28,13 +28,14 @@
                 </div>
             </div>
         </div>
-        <h1>Catalogo Productos</h1>
+        <h1 style="padding: 7px;"><b>.</b></h1>
+        <h1 class="cat" style="color:#ff8364;"><b>Catálogo Productos</b></h1>
         <div class="container">
             <div class="item" th:each="producto : ${productos}">
                 <div class="imagen">
-                    <img th:src="${producto.imagen}" width="500" height="500">
+                    <img th:src="${producto.imagen}" class="imgp">
                     <div class="infoProducto">
-                        <h3 style="font-size:140%;color:#2A5C85;">Producto</h3>
+                        <h3 style="font-size:140%;color:#ff8364;">Producto</h3>
                         <p th:text="${producto.nombre}"></p>
                         <p th:text="${producto.descripcion}"></p>
                         <p th:text="${producto.precio}"></p>

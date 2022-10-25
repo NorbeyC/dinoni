@@ -6,7 +6,7 @@ body { font-family:Arial, Helvetica, sans-serif; }
     align-items: center;
     width: 100%;
     background: none repeat scroll 0 0 #000000;
-    position: sticky;
+    position: fixed;
     
 }
 
@@ -19,8 +19,9 @@ body { font-family:Arial, Helvetica, sans-serif; }
 }
 
 .img {
-    max-width: 150px;
+    max-width: 20%;
     margin: auto;
+    padding: 5px;
 }
 
 .header a {
@@ -90,10 +91,51 @@ body { font-family:Arial, Helvetica, sans-serif; }
     color: #ff8364;
 }
 
+.cat {
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+}
 .container {
     display: flex;
-    padding: 5px;
+    padding: 10px;
     align-items: center;
-    width: 40%;
+    width: 100%;
+    border-radius: 8px;
     background: none repeat scroll 0 0 #000000;
+}
+
+.item {
+    width: 31%;
+    height: 100%;
+    align-items: center;
+    margin: auto;
+    background: none repeat scroll 0 0 #fafafa;
+    border-radius: 8px;
+    border: #000000;
+}
+
+.imagen {
+    width: 100%;
+    height: 600px;
+    align-items: center;
+    padding: 5px;
+    background: none repeat scroll 0 0 #ffffff;
+    border-radius: 8px;
+    border: #000000;
+}
+
+.imgp {
+    width: 100%;
+    height: 70%;
+    padding: 5px;
+}
+
+.infoProducto {
+    top: auto;
+    width: 99%;
+    height: 30%;
+    padding: 5px;
+    border-radius: 8px;
+    background: none repeat scroll 0 0 #e7e7e7;
 }
