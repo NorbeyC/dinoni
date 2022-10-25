@@ -91,4 +91,18 @@ public class ProductoController {
         return mav;
     }
 
+    @GetMapping("/viewSelectedProduct")
+    public ModelAndView viewSelectedProduct(){
+        ModelAndView mav = new ModelAndView();
+        try {
+            List<Producto> productos = productoService.getAllProductos();
+            Producto producto = productos.get(0);
+            mav.setViewName("viewSelectedProduct");
+            mav.addObject("producto", producto);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        } 
+        return mav;
+    }
+
 }
