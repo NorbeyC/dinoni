@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.ProductoService;
@@ -91,12 +90,11 @@ public class ProductoController {
         return mav;
     }
 
-    @GetMapping("/viewSelectedProduct")
-    public ModelAndView viewSelectedProduct(){
+    @GetMapping("/viewSelectedProduct/{name}")
+    public ModelAndView viewSelectedProduct(@PathVariable("name") String nombre){
         ModelAndView mav = new ModelAndView();
         try {
-            List<Producto> productos = productoService.getAllProductos();
-            Producto producto = productos.get(0);
+            Producto producto = productoService.getProductoByNombre(nombre).get();
             mav.setViewName("viewSelectedProduct");
             mav.addObject("producto", producto);
         } catch (Exception e) {
