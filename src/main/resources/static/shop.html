@@ -5,10 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-        <script src="/webjars/jquery/jquery.min.js"></script>
-        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="js/apimock.js"></script>
-        <script src="js/app.js"></script>
+        
         <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/shop.css" />
         <link rel="icon" href="img/icono.ico" />
@@ -34,27 +31,20 @@
         </div>
     </div>
     
-    <div class="product-area">
-        <div class="zigzag-bottom"></div>
+    <h1>Catalogo Productos</h1>
         <div class="container">
-            <div class="row">
-                    <div class="single-shop-product">
-                        <div class="product-upper">
-                            <img src="img/product-2.jpg" alt="">
-                        </div>
-                        <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                        <div class="product-carousel-price">
-                            <ins>$899.00</ins> <del>$999.00</del>
-                        </div>  
-                        
-                        <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                        </div>                       
+            <div class="item" th:each="producto : ${productos}">
+                <div class="imagen">
+                    <img th:src="${producto.imagen}" width="500" height="500">
+                    <div class="infoProducto">
+                        <h3 style="font-size:140%;color:#2A5C85;">Producto</h3>
+                        <p th:text="${producto.nombre}"></p>
+                        <p th:text="${producto.descripcion}"></p>
+                        <p th:text="${producto.precio}"></p>
                     </div>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
     
   </body>
 </html>
