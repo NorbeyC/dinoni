@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.eci.arsw.dinoni.service.ResenaService;
 import edu.eci.arsw.dinoni.model.Resena;
@@ -35,6 +36,15 @@ public class ResenaController {
             return new ResponseEntity<>("No se ha encontrado el Id de la Reseña ",HttpStatus.NOT_FOUND);
         }
         Resena resena = resenaService.getResenaById(id).get();
+        return new ResponseEntity<>(resena, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping(value = "/resenas", params = "producto")
+    public ResponseEntity<?> getResenaByProducto(@RequestParam String producto){
+        if(!resenaService.existsByIdentificacionProducto(producto)){
+            return new ResponseEntity<>("No se ha encontrado el producto de la Reseña ",HttpStatus.NOT_FOUND);
+        }
+        List<Resena> resena = resenaService.getResenaByIdentificacionProducto(producto);
         return new ResponseEntity<>(resena, HttpStatus.ACCEPTED);
     }
 

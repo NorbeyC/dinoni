@@ -113,12 +113,13 @@ INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado,
 INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Portátil Hp Gamer 15 Corei5','Nuevo Portátil Hp Gamer 15 Corei5',4180000,8,'TECNOLOGIA','D','https://http2.mlstatic.com/D_NQ_NP_2X_737136-MCO43291277065_082020-F.webp');
 INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Amazon Echo Dot 4th','Nuevo Amazon Echo Dot 4th',171200,7,'TECNOLOGIA','D','https://http2.mlstatic.com/D_NQ_NP_2X_750680-MLA45737899828_042021-F.webp');
 INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Audífonos inalámbricos Sony 1000X','Nuevos Audífonos inalámbricos Sony 1000X',1080000,4,'TECNOLOGIA','D','https://http2.mlstatic.com/D_NQ_NP_880985-MLA44483791963_012021-O.webp');
-INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Sony PlayStation 5','Nuevo Sony PlayStation 5',3600000,4,'TECNOLOGIA','D','https://http2.mlstatic.com/D_NQ_NP_880985-MLA44483791963_012021-O.webp');
+INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Sony PlayStation 5','Nuevo Sony PlayStation 5',3600000,4,'TECNOLOGIA','D','https://res.cloudinary.com/walmart-labs/image/upload/w_960,dpr_auto,f_auto,q_auto:best/gr/images/product-images/img_large/00071171954176L.jpg');
 INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Aspiradora trapeadora robot Xiaomi','Nueva Aspiradora trapeadora robot Xiaomi',1500000,8,'TECNOLOGIA','D','https://http2.mlstatic.com/D_NQ_NP_735287-MLA46033006216_052021-O.webp');
 INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado, imagen) VALUES ('Bocina Bose S1 Pro System','Nueva Bocina Bose S1 Pro System',3400000,4,'TECNOLOGIA','D','https://http2.mlstatic.com/D_NQ_NP_624623-MLA32788000452_112019-O.webp');
 
 
 #Usuarios
+INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('admin','CC','0000','admin@admin.com','admin123',0000);
 INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('DIEGO LEON','CC','1135','diego@gmail.com','diego12345',3008556023);
 INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('NORBEY CARDONA','CC','2541','norbey@gmail.com','norbeychiquis',3214569878);
 INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('NICOLAS CASTRO','CC','6548','nicolas@hotmail.com','nico12',3657895123);
@@ -156,10 +157,11 @@ SELECT * FROM nps;
 #ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'diego12345';
 
 #DROPS
-drop table usuarios;
-drop table productos;
 drop table compras;
 drop table resenas;
 drop table ventas;
 drop table estadisticas;
 drop table nps;
+drop table usuarios;
+drop table productos;
+
