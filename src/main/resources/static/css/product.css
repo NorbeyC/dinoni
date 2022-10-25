@@ -120,17 +120,38 @@ body { font-family:Arial, Helvetica, sans-serif; }
     padding: 5px;
     background: none repeat scroll 0 0 #ffffff;
     border-radius: 8px;
-    border: #000000;
 }
 
 .imgp {
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 80%;
     height: 70%;
     padding: 5px;
 }
 
+
+.nps {
+    margin: auto;
+    width: 90%;
+    height: 30%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 8px;
+    background: none repeat scroll 0 0 #e7e7e7;
+}
+
+.infop {
+    width: 40%;
+    height: 500px;
+    padding: 5px;
+    background: none repeat scroll 0 0 #ffffff;
+    border-radius: 8px;
+}
+
 .infoProducto {
-    width: 120%;
+    width: 98%;
     height: 25%;
     padding: 5px;
     margin: 5px;
@@ -139,7 +160,7 @@ body { font-family:Arial, Helvetica, sans-serif; }
 }
 
 .envio {
-    width: 120%;
+    width: 98%;
     margin: 5px;
     padding: 5px;
     border-radius: 8px;
@@ -149,6 +170,12 @@ body { font-family:Arial, Helvetica, sans-serif; }
 select {
     width: 60px;
     height: 35px;
+}
+
+.añadir{
+    width: 100%;
+    height: 37px;
+    align-items: center;
 }
 
 .añadir button {
@@ -164,4 +191,6 @@ select {
     background-color:#ff7b5b;
     margin-top: 10px;
 }
+
+
 

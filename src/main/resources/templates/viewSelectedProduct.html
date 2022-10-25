@@ -33,8 +33,11 @@
             <div class="item" th:each="producto : ${producto}">
                 <div class="imagen">
                     <img th:src="${producto.imagen}" class="imgp">
+                    <div class="nps">
+                        <h5>Net Promoter Score Meter(en desarrollo)</h5>
+                    </div>
                 </div>
-                <div>
+                <div class="infop">
                     <div class="infoProducto">
                         <b><p th:text="${producto.nombre}"></p></b>
                         <p th:text="${producto.descripcion}"></p>
