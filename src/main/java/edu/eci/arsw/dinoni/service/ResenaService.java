@@ -70,7 +70,7 @@ public class ResenaService {
      * @return
      */
 
-    public Optional<Resena> getResenaByIdentificacionProducto(String identificacionProducto){
+    public List<Resena> getResenaByIdentificacionProducto(String identificacionProducto){
         return resenaRepository.findByProducto(identificacionProducto);
     }
 

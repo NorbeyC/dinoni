@@ -1,5 +1,6 @@
 package edu.eci.arsw.dinoni.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,7 @@ public interface ResenaRepository extends JpaRepository<Resena, Long> {
 
     void deleteById(long id);
 
-    Optional<Resena> findByProducto(String producto);
+    List<Resena> findByProducto(String producto);
 
     boolean existsByProducto(String producto);
 
