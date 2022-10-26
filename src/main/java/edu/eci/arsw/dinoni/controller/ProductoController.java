@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -61,6 +62,7 @@ public class ProductoController {
         }
     }
 
+    
     @DeleteMapping("/deleteProducto/{id}")
     public ResponseEntity<?> deleteProducto(@PathVariable("id") long id){
         if(!productoService.existsById(id)){
@@ -107,4 +109,59 @@ public class ProductoController {
         return mav;
     }
 
+    @GetMapping("nuevoProducto")
+    public ModelAndView nuevoProducto(){
+        ModelAndView mav = new ModelAndView();
+        Producto producto = new Producto();
+        mav.setViewName("nuevoProducto");
+        mav.addObject("producto", producto);
+        return mav;
+    }
+
+    @PostMapping("/saveProduct")
+    public String saveProduct(@ModelAttribute("producto") Producto producto){
+        productoService.saveProducto(producto);
+        return "redirect:/tienda/productsManagement";
+    }
+
+    @PostMapping("/actualizarProducto/{id}")
+    public String actualizarProducto(@PathVariable("id") long id, @ModelAttribute("producto") Producto producto){
+        if(!productoService.existsById(id)){
+            productoService.saveProducto(producto);
+        }
+        productoService.updateProducto(id, producto);
+        return "redirect:/tienda/productsManagement";
+    }
+
+    @GetMapping("editarProducto/{id}")
+    public ModelAndView actualizarProducto(@PathVariable("id") long id){
+        ModelAndView mav = new ModelAndView();
+        Producto producto = productoService.getProductoById(id).get();
+        mav.setViewName("editarProducto");
+        mav.addObject("producto", producto);
+        return mav;
+    }
+
+    @GetMapping("/eliminarProducto/{id}")
+    public String eliminarProducto(@PathVariable("id") long id){
+        if(productoService.existsById(id)){
+            productoService.deleteProducto(id);
+        }
+        return "redirect:/tienda/productsManagement";
+    }
+
+
+    @GetMapping(value="productsManagement")
+    public ModelAndView productsManagement(){
+        ModelAndView mav = new ModelAndView();
+        try {
+            List<Producto> productos = productoService.getAllProductos();
+            mav.setViewName("productsManagement");
+            mav.addObject("productos", productos);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        } 
+        return mav;
+    }
 }
+

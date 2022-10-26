@@ -16,6 +16,7 @@ public class Producto{
     private String descripcion;
     private int precio;
     private int cantidad;
+    private String categoria;
     private char estado; //D: Disponible, N: No Disponible, E: Eliminado
     private String imagen;
     
@@ -29,75 +30,92 @@ public class Producto{
      * @param descripcion
      * @param precio
      * @param cantidad
+     * @param categoria
      * @param estado
      * @param imagen
      */
-    public Producto(long id, String nombre, String descripcion, int precio, int cantidad, char estado, String imagen) {
+    public Producto(long id, String nombre, String descripcion, int precio, int cantidad, String categoria, char estado, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.categoria = categoria;
         this.estado = estado;
         this.imagen = imagen;
     }
 
     /**
-     * Constructor de la clase Producto sin recibir descripcion ni estado
-     * @param id
+     * Constructor de la clase Producto sin el id
      * @param nombre
+     * @param descripcion
      * @param precio
      * @param cantidad
+     * @param categoria
+     * @param estado
      * @param imagen
      */
-    public Producto(long id, String nombre, int precio, int cantidad, String imagen) {
-        this.id = id;
+    public Producto(String nombre, String descripcion, int precio, int cantidad, String categoria, char estado, String imagen) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.descripcion = "";
-        this.estado = 'D';
+        this.categoria = categoria;
+        this.estado = estado;
         this.imagen = imagen;
     }
     
+
     public long getId() {
-        return id;
+        return this.id;
     }
-    
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
-    
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
-    
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public int getPrecio() {
-        return precio;
+        return this.precio;
     }
-    
+
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
+
     public int getCantidad() {
-        return cantidad;
+        return this.cantidad;
     }
-    
+
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
+    public String getCategoria() {
+        return this.categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     public char getEstado() {
-        return estado;
+        return this.estado;
     }
 
     public void setEstado(char estado) {
@@ -105,7 +123,7 @@ public class Producto{
     }
 
     public String getImagen() {
-        return imagen;
+        return this.imagen;
     }
 
     public void setImagen(String imagen) {
@@ -121,12 +139,11 @@ public class Producto{
             ", descripcion='" + getDescripcion() + "'" +
             ", precio='" + getPrecio() + "'" +
             ", cantidad='" + getCantidad() + "'" +
+            ", categoria='" + getCategoria() + "'" +
             ", estado='" + getEstado() + "'" +
             ", imagen='" + getImagen() + "'" +
             "}";
     }
-
-    
 
 }
 

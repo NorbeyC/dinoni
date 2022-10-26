@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Productos</title>
+    </head>
+
+    <body>
+
+        <div class="produccontainer">
+            <div class ="productrow">
+                <h1>Lista Productos</h1>>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
+                    <th>Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.cantidad}"></td>
+                    <td th:text="${producto.estado}"></td>
+                    <td th:text="${producto.imagen}"></td>
+                    <td>
+                        <a href="nuevoProducto" class="btn btn-success">Nuevo</a>
+                        <a th:href="@{/tienda/editarProducto/{id}(id=${producto.id})}" class="btn btn-warning">Editar</a>
+                        <a th:href="@{/tienda/eliminarProducto/{id}(id=${producto.id})}">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+    </body>
+
+</html>

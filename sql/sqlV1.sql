@@ -41,6 +41,7 @@ CREATE TABLE Resenas (
     identificacion_usuario VARCHAR(20) NOT NULL,
     nombre_usuario VARCHAR(50) NOT NULL,
     comentario VARCHAR(200) NOT NULL,
+    fecha VARCHAR(20) NOT NULL,
     primary key(id)
 );
 
@@ -110,9 +111,16 @@ INSERT INTO Compras(identificacion_usuario, nombre_usuario, producto, cantidad, 
 INSERT INTO Compras(identificacion_usuario, nombre_usuario, producto, cantidad, total) VALUES('6548','NICOLAS CASTRO','Samsung Galaxy S22',3,15000000);
 
 #Resenas
-INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario,comentario) VALUES('Iphone14','1135','DIEGO LEON','El mejor producto de mi vida');
-INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario) VALUES('Iphone13','2541','NORBEY CARDONA','Bastante completo');
-INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario) VALUES('Samsung Galaxy S22','6548','NICOLAS CASTRO','No cumple con las expectativas');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario,comentario,fecha) VALUES('Iphone14','1135','DIEGO LEON','El mejor producto de mi vida','2022-04-20');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario,comentario,fecha) VALUES('Iphone14','2541','NORBEY CARDONA','Me ha encantado','2022-04-22');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario,fecha) VALUES('Iphone14','6548','NICOLAS CASTRO','El mejor celular','2022-09-05');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario,fecha) VALUES('Iphone13','2541','NORBEY CARDONA','Bastante completo','2022-06-14');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario,comentario,fecha) VALUES('Iphone13','1135','DIEGO LEON','Lo mejor es su pantalla','2022-04-28');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario,fecha) VALUES('Iphone13','6548','NICOLAS CASTRO','No tiene potencia en los altavoces','2022-10-20');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario,fecha) VALUES('Samsung Galaxy S22','6548','NICOLAS CASTRO','No cumple con las expectativas','2022-09-05');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario,comentario,fecha) VALUES('Samsung Galaxy S22','1135','DIEGO LEON','Puede mejorar','2022-02-19');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario,fecha) VALUES('Samsung Galaxy S22','2541','NORBEY CARDONA','Lo mejor de lo mejor','2022-06-11');
+
 
 #Estadisticas
 
