@@ -1,5 +1,6 @@
 package edu.eci.arsw.dinoni.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,16 @@ public class Resena {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name="producto")
     private String producto;
+    @Column(name = "identificacion_usuario")
     private String identificacionUsuario;
+    @Column(name = "nombre_usuario")
     private String nombreUsuario;
+    @Column(name = "comentario")
     private String comentario;
+    @Column(name= "fecha")
+    private String fecha;
 
     public Resena() {
     }
@@ -28,29 +35,31 @@ public class Resena {
      * @param identificacionUsuario
      * @param nombreUsuario
      * @param comentario
+     * @param fecha
      */
-
-    public Resena(long id, String producto, String identificacionUsuario, String nombreUsuario, String comentario) {
+    public Resena(long id, String producto, String identificacionUsuario, String nombreUsuario, String comentario, String fecha) {
         this.id = id;
         this.producto = producto;
         this.identificacionUsuario = identificacionUsuario;
         this.nombreUsuario = nombreUsuario;
         this.comentario = comentario;
+        this.fecha = fecha;
     }
 
     /**
-     * Constructor de la clase Resena sin recibir id
+     * Constructor de la clase Resena sin id
      * @param producto
      * @param identificacionUsuario
      * @param nombreUsuario
      * @param comentario
+     * @param fecha
      */
-
-    public Resena(String producto, String identificacionUsuario, String nombreUsuario, String comentario) {
+    public Resena(String producto, String identificacionUsuario, String nombreUsuario, String comentario, String fecha) {
         this.producto = producto;
         this.identificacionUsuario = identificacionUsuario;
         this.nombreUsuario = nombreUsuario;
         this.comentario = comentario;
+        this.fecha = fecha;
     }
 
 
@@ -94,6 +103,15 @@ public class Resena {
         this.comentario = comentario;
     }
 
+    public String getFecha() {
+        return this.fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+
     @Override
     public String toString() {
         return "{" +
@@ -102,6 +120,8 @@ public class Resena {
             ", identificacionUsuario='" + getIdentificacionUsuario() + "'" +
             ", nombreUsuario='" + getNombreUsuario() + "'" +
             ", comentario='" + getComentario() + "'" +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
+
 }

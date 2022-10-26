@@ -4,7 +4,7 @@ use donani;
 CREATE TABLE Usuarios (
 	id int NOT NULL auto_increment,
     nombre VARCHAR(50) unique NOT NULL,
-    tipoIdentificacion VARCHAR(3) NOT NULL,
+    tipo_identificacion VARCHAR(3) NOT NULL,
     identificacion VARCHAR(20) unique NOT NULL,
     correo VARCHAR(50) NOT NULL,
     passwd VARCHAR(20) NOT NULL,
@@ -27,41 +27,29 @@ CREATE TABLE Productos (
 
 CREATE TABLE Compras (
 	id int NOT NULL auto_increment,
-    identificacionUsuario VARCHAR(20) NOT NULL,
-    nombreUsuario VARCHAR(50) NOT NULL,
+    identificacion_usuario VARCHAR(20) NOT NULL,
+    nombre_usuario VARCHAR(50) NOT NULL,
     producto VARCHAR(50) NOT NULL,
     cantidad NUMERIC(9) NOT NULL,
     total NUMERIC(10) NOT NULL,
-    primary key(id),
-    FOREIGN KEY(identificacionUsuario) REFERENCES usuarios(identificacion)
-	ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(nombreUsuario) REFERENCES usuarios(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(producto) REFERENCES productos(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE
+    primary key(id)
 );
 
 CREATE TABLE Resenas (
 	id int NOT NULL auto_increment,
     producto VARCHAR(50) NOT NULL,
-    identificacionUsuario VARCHAR(20) NOT NULL,
-    nombreUsuario VARCHAR(50) NOT NULL,
+    identificacion_usuario VARCHAR(20) NOT NULL,
+    nombre_usuario VARCHAR(50) NOT NULL,
     comentario VARCHAR(200) NOT NULL,
-    primary key(id),
-    FOREIGN KEY(identificacionUsuario) REFERENCES usuarios(identificacion)
-	ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(nombreUsuario) REFERENCES usuarios(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(producto) REFERENCES productos(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE
+    primary key(id)
 );
 
 CREATE TABLE Ventas (
 	id int NOT NULL auto_increment,
-    ventasDia NUMERIC(10) NOT NULL,
+    ventas_dia NUMERIC(10) NOT NULL,
     fecha VARCHAR(20) NOT NULL,
-    ventasSemana NUMERIC(10) NOT NULL,
-    ventasMes NUMERIC(10) NOT NULL,
+    ventas_semana NUMERIC(10) NOT NULL,
+    ventas_mes NUMERIC(10) NOT NULL,
     primary key(id)
 );
 
@@ -69,24 +57,16 @@ CREATE TABLE Estadisticas (
 	id int NOT NULL auto_increment,
     producto VARCHAR(50) NOT NULL,
     ventas NUMERIC(10) NOT NULL,
-    primary key(id),
-    FOREIGN KEY(producto) REFERENCES productos(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE
+    primary key(id)
 );
 
 CREATE TABLE nps (
 	id int NOT NULL auto_increment,
     producto VARCHAR(50) NOT NULL,
-    identificacionUsuario VARCHAR(20) NOT NULL,
-    nombreUsuario VARCHAR(50) NOT NULL,
+    identificacion_usuario VARCHAR(20) NOT NULL,
+    nombre_usuario VARCHAR(50) NOT NULL,
     satisfaccion decimal(10,2) NOT NULL,
-    primary key(id),
-    FOREIGN KEY(identificacionUsuario) REFERENCES usuarios(identificacion)
-	ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(nombreUsuario) REFERENCES usuarios(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(producto) REFERENCES productos(nombre)
-	ON DELETE CASCADE ON UPDATE CASCADE
+    primary key(id)
 );
 
 
@@ -119,20 +99,20 @@ INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado,
 
 
 #Usuarios
-INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('admin','CC','0000','admin@admin.com','admin123',0000);
-INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('DIEGO LEON','CC','1135','diego@gmail.com','diego12345',3008556023);
-INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('NORBEY CARDONA','CC','2541','norbey@gmail.com','norbeychiquis',3214569878);
-INSERT INTO Usuarios(nombre,tipoIdentificacion, identificacion, correo, passwd, telefono) VALUES('NICOLAS CASTRO','CC','6548','nicolas@hotmail.com','nico12',3657895123);
+INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('admin','CC','0000','admin@admin.com','admin123',0000);
+INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('DIEGO LEON','CC','1135','diego@gmail.com','diego12345',3008556023);
+INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('NORBEY CARDONA','CC','2541','norbey@gmail.com','norbeychiquis',3214569878);
+INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('NICOLAS CASTRO','CC','6548','nicolas@hotmail.com','nico12',3657895123);
 
 #Compras
-INSERT INTO Compras(identificacionUsuario, nombreUsuario, producto, cantidad, total) VALUES('1135','DIEGO LEON','Iphone14',2,26000000);
-INSERT INTO Compras(identificacionUsuario, nombreUsuario, producto, cantidad, total) VALUES('2541','NORBEY CARDONA','Iphone13',1,6000000);
-INSERT INTO Compras(identificacionUsuario, nombreUsuario, producto, cantidad, total) VALUES('6548','NICOLAS CASTRO','Samsung Galaxy S22',3,15000000);
+INSERT INTO Compras(identificacion_usuario, nombre_usuario, producto, cantidad, total) VALUES('1135','DIEGO LEON','Iphone14',2,26000000);
+INSERT INTO Compras(identificacion_usuario, nombre_usuario, producto, cantidad, total) VALUES('2541','NORBEY CARDONA','Iphone13',1,6000000);
+INSERT INTO Compras(identificacion_usuario, nombre_usuario, producto, cantidad, total) VALUES('6548','NICOLAS CASTRO','Samsung Galaxy S22',3,15000000);
 
 #Resenas
-INSERT INTO Resenas(producto,identificacionUsuario, nombreUsuario,comentario) VALUES('Iphone14','1135','DIEGO LEON','El mejor producto de mi vida');
-INSERT INTO Resenas(producto,identificacionUsuario, nombreUsuario, comentario) VALUES('Iphone13','2541','NORBEY CARDONA','Bastante completo');
-INSERT INTO Resenas(producto,identificacionUsuario, nombreUsuario, comentario) VALUES('Samsung Galaxy S22','6548','NICOLAS CASTRO','No cumple con las expectativas');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario,comentario) VALUES('Iphone14','1135','DIEGO LEON','El mejor producto de mi vida');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario) VALUES('Iphone13','2541','NORBEY CARDONA','Bastante completo');
+INSERT INTO Resenas(producto,identificacion_usuario, nombre_usuario, comentario) VALUES('Samsung Galaxy S22','6548','NICOLAS CASTRO','No cumple con las expectativas');
 
 #Estadisticas
 
@@ -141,9 +121,9 @@ INSERT INTO Resenas(producto,identificacionUsuario, nombreUsuario, comentario) V
 
 
 #Nps
-INSERT INTO nps(producto,identificacionUsuario,nombreUsuario,satisfaccion) VALUES('Iphone14','1135','DIEGO LEON',5.00);
-INSERT INTO nps(producto,identificacionUsuario,nombreUsuario,satisfaccion) VALUES('Iphone13','2541','NORBEY CARDONA',4.50);
-INSERT INTO nps(producto,identificacionUsuario,nombreUsuario,satisfaccion) VALUES('Samsung Galaxy S22','6548','NICOLAS CASTRO',2.9);
+INSERT INTO nps(producto,identificacion_usuario, nombre_usuario,satisfaccion) VALUES('Iphone14','1135','DIEGO LEON',5.00);
+INSERT INTO nps(producto,identificacion_usuario, nombre_usuario,satisfaccion) VALUES('Iphone13','2541','NORBEY CARDONA',4.50);
+INSERT INTO nps(producto,identificacion_usuario, nombre_usuario,satisfaccion) VALUES('Samsung Galaxy S22','6548','NICOLAS CASTRO',2.9);
 
 #CONSULTAS
 SELECT * FROM productos;

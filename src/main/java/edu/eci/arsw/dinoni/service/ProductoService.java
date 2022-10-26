@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.dinoni.model.Producto;
+import edu.eci.arsw.dinoni.model.Resena;
 import edu.eci.arsw.dinoni.repository.ProductoRepository;
 
 @Service
@@ -48,6 +49,10 @@ public class ProductoService {
      */
     public Optional<Producto> getProductoByNombre(String nombre){
         return productoRepository.findByNombre(nombre);
+    }
+
+    public List<Resena> getResenasByProducto(String producto){
+        return productoRepository.findResena(producto);
     }
 
     /**

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.ProductoService;
 import edu.eci.arsw.dinoni.model.Producto;
+import edu.eci.arsw.dinoni.model.Resena;
 
 @Controller
 @RequestMapping("/tienda")
@@ -98,6 +99,8 @@ public class ProductoController {
             Producto producto = productoService.getProductoByNombre(name).get();
             mav.setViewName("viewSelectedProduct");
             mav.addObject("producto", producto);
+            List<Resena> resenas = productoService.getResenasByProducto(producto.getNombre());
+            mav.addObject("resenas", resenas);
         } catch (Exception e) {
             mav.setViewName("error");
         } 
