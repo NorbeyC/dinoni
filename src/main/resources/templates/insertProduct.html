@@ -3,11 +3,11 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/shop.css" />
+        <link rel="stylesheet" href="/css/product.css" />
         <link rel="icon" href="/img/icono.ico" />    
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DINONI-Tienda</title>
+        <title>DINONI-insertProducto</title>
     </head>
     <body>
         <div class="header">
@@ -28,24 +28,18 @@
                 </div>
             </div>
         </div>
-        <h1 style="padding: 5px;"><b>.</b></h1>
-        <h1 class="cat" style="color:#ff8364;"><b>Catálogo Productos</b></h1>
+        <h1 style="padding: 12px;"><b>.</b></h1>
+
         <div class="container">
-            <div class="item" th:each="producto : ${productos}">
-                <div class="imagen">
-                    <img th:src="${producto.imagen}" class="imgp">
-                    <div class="infoProducto">
-                        <a href=viewSelectedProduct.html th:href="@{viewSelectedProduct(name=${producto.nombre})}" class="namep"><b><p th:text="${producto.nombre}"></p></b></a>
-                        <p th:text="${producto.descripcion}"></p>
-                        <div style="display: flex;">
-                            <p style="font-size: small;">COP$</p>
-                            <p th:text="${producto.precio}"></p>
-                        </div>
-                        <div style="display: flex;">
-                            <p style="font-size: small;">Estado: </p>
-                            <p th:text="${producto.estado}" style="color:#ff7b5b; font-size: small;"></p>
-                        </div>
-                    </div>
+            <div class="item" th:each="producto : ${producto}">
+                <div class="insertPro">
+                    <h3>Inserta tu producto</h3>
+                    <input id = 'nombre'  name="nombre" type="text" placeholder="Nombre" th:value="${producto.nombre}">
+                    <input id = 'descripcion'  name="descripcion" type="text" placeholder="Descripcion" th:value="${producto.descripcion}">
+                    <input id = 'precio'  name="precio" type="text" placeholder="Precio" th:value="${producto.precio}">
+                    <input id = 'cantidad'  name="cantidad" type="text" placeholder="Cantidad" th:value="${producto.cantidad}">
+                    <input id = 'estado'  name="estado" type="text" placeholder="Estado" th:value="${producto.estado}">
+                    <input id = 'imagen'  name="imagen" type="text" placeholder="URLImagen" th:value="${producto.imagen}">
                 </div>
             </div>
         </div>

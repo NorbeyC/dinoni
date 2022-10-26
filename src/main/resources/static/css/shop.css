@@ -139,6 +139,16 @@ body { font-family:Arial, Helvetica, sans-serif; }
     width: 99%;
     height: 30%;
     padding: 5px;
+    line-height : 15px;
     border-radius: 8px;
     background: none repeat scroll 0 0 #e7e7e7;
+}
+
+.namep {
+    text-decoration: none;
+    color: #ff8364;
+}
+
+.namep:hover {
+    color: #ffab95;
 }

@@ -7,7 +7,7 @@
         <link rel="icon" href="/img/icono.ico" />    
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Producto</title>
+        <title>DINONI-Producto</title>
     </head>
     <body>
         <div class="header">
@@ -41,7 +41,14 @@
                     <div class="infoProducto">
                         <b><p th:text="${producto.nombre}"></p></b>
                         <p th:text="${producto.descripcion}"></p>
-                        <b><p th:text="${producto.precio}"></p></b>
+                        <div style="display: flex;">
+                            <b><p style="font-size: small;">COP$</p></b>
+                            <b><p th:text="${producto.precio}"></p></b>
+                        </div>
+                        <div style="display: flex;">
+                            <p style="font-size: small;">Estado: </p>
+                            <p th:text="${producto.estado}" style="color:#ff7b5b; font-size: small;"></p>
+                        </div>
                     </div>
                     <div class="envio">
                         <h3 style="font-size:140%;color:#00bd19;">Envío gratis</h3>
@@ -66,17 +73,10 @@
                     </div>
                     <div class="coms" >
                         <div class="res">
-                            <h5>Aqui van los comentarios</h5>
-                            <div class="infoResenas">
-                                <p>Por alber hace 105 meses <br>
-                                    buen producto, como siempre<br>
-                                    <br>
-                                    Por zerodarck hace 105 meses<br>
-                                    Muchas gracias, este producto me ayudó un montón. Simple y funciona!<br>
-                                    <br>
-                                    Por Natalia hace 87 meses<br>
-                                    Cumple con lo ofrecido!<br>
-                                </p>
+                            <div class="infoResenas" th:each="resena : ${resenas}">
+                                <b><p th:text="${resena.nombreUsuario}" ></p></b>
+                                <p th:text="${resena.fecha}" style="font-size: x-small;"></p>
+                                <p th:text="${resena.comentario}"></p>
                             </div>
                         </div>
                         <div class="insertCom">
