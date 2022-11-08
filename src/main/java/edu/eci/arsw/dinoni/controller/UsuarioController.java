@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.UsuarioService;
 import edu.eci.arsw.dinoni.model.Usuario;
@@ -20,6 +22,8 @@ import edu.eci.arsw.dinoni.model.Usuario;
 @Controller
 @RequestMapping("/tienda")
 public class UsuarioController {
+
+ 
 
     @Autowired
     UsuarioService usuarioService;
@@ -38,8 +42,8 @@ public class UsuarioController {
         return new ResponseEntity<>(usuario, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/saveUsuario")
-    public ResponseEntity<?> saveUsuario(@RequestBody Usuario usuario){
+    @PostMapping("/newUsuario")
+    public ResponseEntity<?> newUsuario(@RequestBody Usuario usuario){
         try {
             usuarioService.saveUsuario(usuario);
             return new ResponseEntity<>("Se ha creado correctamente ",HttpStatus.CREATED);
@@ -66,5 +70,21 @@ public class UsuarioController {
         usuarioService.updateUsuario(id, usuario);
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("nuevoUsuario")
+    public ModelAndView nuevoUsuario(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("nuevoUsuario");
+        Usuario usuario = new Usuario();
+        mav.addObject("usuario", usuario);
+        return mav;
+    }
+
+    @PostMapping("/saveUsuario")
+    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario){
+        usuarioService.saveUsuario(usuario);
+        return "redirect:/";
+    }
+
     
 }

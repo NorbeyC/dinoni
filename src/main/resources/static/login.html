@@ -19,13 +19,13 @@
       <div class="title">
         <h1>Bienvenido</h1>
       </div>
-      <form id="loginform">
+      <form id="loginform" th:action="@{/tienda/ingresar}" method="post">
         <input id = 'email'  name="email" type="email" placeholder="Correo" required>
         <input id = 'password' name="password" type="password" placeholder="Contraseña" required>
         <button  type="submit" onclick='' class='btn'>Login</button>
       </form>
       <div class="reg">
-        <a href="#">Registrarse</a>
+        <a href="/tienda/nuevoUsuario">Registrarse</a>
       </div>
     </div>
   </div>

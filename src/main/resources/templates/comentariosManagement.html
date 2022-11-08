@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="icon" href="/img/icono.ico" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comentarios</title>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class ="row">
+                <h1>Lista Comentarios</h1>>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Identificacion Usuario</th>
+                    <th>Nombre Usuario</th>
+                    <th>Comentario</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="resena : ${resenas}">
+                    <td th:text="${resena.id}"></td>
+                    <td th:text="${resena.producto}"></td>
+                    <td th:text="${resena.identificacionUsuario}"></td>
+                    <td th:text="${resena.nombreUsuario}"></td>
+                    <td th:text="${resena.comentario}"></td>
+                    <td th:text="${resena.fecha}"></td>
+                    <td>
+                        <a th:href="@{/tienda/eliminarComentario/{id}(id=${resena.id})}">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+    </body>
+
+</html>
