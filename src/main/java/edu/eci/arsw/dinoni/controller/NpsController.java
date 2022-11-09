@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.NpsService;
 import edu.eci.arsw.dinoni.model.Nps;
@@ -38,8 +40,8 @@ public class NpsController {
         return new ResponseEntity<>(nps, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/saveNps")
-    public ResponseEntity<?> saveNps(@RequestBody Nps nps){
+    @PostMapping("/guardarNps")
+    public ResponseEntity<?> guardarNps(@RequestBody Nps nps){
         try {
             npsService.saveNps(nps);
             return new ResponseEntity<>("Se ha creado correctamente ",HttpStatus.CREATED);
@@ -67,6 +69,58 @@ public class NpsController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
     
+    @GetMapping("nuevoNps")
+    public ModelAndView nuevoNps(){
+        ModelAndView mav = new ModelAndView();
+        Nps nps = new Nps();
+        mav.setViewName("nuevoNps");
+        mav.addObject("nps", nps);
+        return mav;
+    }
 
+    @PostMapping("/saveNps")
+    public String saveNps(@ModelAttribute("nps") Nps nps){
+        npsService.saveNps(nps);
+        return "redirect:/tienda/viewProductos";
+    }
+
+    @PostMapping("/actualizarNps/{id}")
+    public String actualizarNps(@PathVariable("id") long id, @ModelAttribute("nps") Nps nps){
+        if(!npsService.existsById(id)){
+            npsService.saveNps(nps);
+        }
+        npsService.updateNps(id, nps);
+        return "redirect:/tienda/npsManagement";
+    }
+
+    @GetMapping("editarNps/{id}")
+    public ModelAndView editarNps(@PathVariable("id") long id){
+        ModelAndView mav = new ModelAndView();
+        Nps nps = npsService.getNpsById(id).get();
+        mav.setViewName("editarNps");
+        mav.addObject("nps", nps);
+        return mav;
+    }
+
+    @GetMapping("eliminarNps/{id}")
+    public String eliminarNps(@PathVariable("id") long id){
+        if(npsService.existsById(id)){
+            npsService.deleteNps(id);
+        }
+        return "redirect:/tienda/npsManagement";
+    }
+
+    @GetMapping("/npsManagement")
+    public ModelAndView npsManagement(){
+        ModelAndView mav = new ModelAndView();
+        try {
+            List<Nps> nps = npsService.getAllNps();
+            mav.setViewName("npsManagement");
+            mav.addObject("nps", nps);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        }
+        return mav;
+    }
 }
 

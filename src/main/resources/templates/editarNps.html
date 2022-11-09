@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="icon" href="/img/icono.ico" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Editar Nps</title>
+    </head>
+    <body style="background-color: #292724;">
+        <img src="/img/logo.png" class="rounded mx-auto d-block">
+        <div class="container">
+            <div class ="m-0 vh-100 row justify-content-center align-items-center ">
+                <div class="col-9 align-self-center" style="background-color: #DCA735;">
+                    <h1 class = "text-center">Actualizar Nps</h1>
+                    <div class="card-body">
+                        <form th:action="@{/tienda/actualizarNps/{id}(id=${nps.id})}" th:object="${nps}" method = "POST">
+                            <div class="form-group">
+                                <label>Producto: </label>
+                                <input type="text" name="Producto" th:field="*{producto}" class="form-control" placeholder="Producto" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Identificacion: </label>
+                                <input type="text" name="Identificacion" th:field="*{identificacionUsuario}" class="form-control" placeholder="Numero Identificacion" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Nombre: </label>
+                                <input type="text" name="nombre" th:field="*{nombreUsuario}" class="form-control" placeholder="Nombre" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Satisfaccion: </label>
+                                <input type="text" name="satisfaccion" th:field="*{satisfaccion}" class="form-control" placeholder="Satisfaccion" required>
+                            </div>
+                            <br>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

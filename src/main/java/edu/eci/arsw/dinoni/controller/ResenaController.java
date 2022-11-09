@@ -85,7 +85,7 @@ public class ResenaController {
         return "redirect:/tienda/viewProductos";
     }
 
-    @PostMapping("/actualizarComentario")
+    @PostMapping("/actualizarComentario/{id}")
     public String actualizarComentario(@PathVariable("id") long id, @ModelAttribute("resena") Resena resena){
         if(!resenaService.existsById(id)){
             resenaService.saveResena(resena);

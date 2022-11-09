@@ -6,14 +6,14 @@
         <link rel="icon" href="/img/icono.ico" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Comentarios</title>
+        <title>Nps</title>
     </head>
 
     <body>
 
         <div class="container">
             <div class ="row">
-                <h1>Lista Comentarios</h1>>
+                <h1>Lista Nps</h1>>
             </div>
         </div>
         <table class="table table-striped">
@@ -23,21 +23,19 @@
                     <th>Producto</th>
                     <th>Identificacion Usuario</th>
                     <th>Nombre Usuario</th>
-                    <th>Comentario</th>
-                    <th>Fecha</th>
+                    <th>Satisfaccion</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="resena : ${resenas}">
-                    <td th:text="${resena.id}"></td>
-                    <td th:text="${resena.producto}"></td>
-                    <td th:text="${resena.identificacionUsuario}"></td>
-                    <td th:text="${resena.nombreUsuario}"></td>
-                    <td th:text="${resena.comentario}"></td>
-                    <td th:text="${resena.fecha}"></td>
+                <tr th:each="np : ${nps}">
+                    <td th:text="${np.id}"></td>
+                    <td th:text="${np.producto}"></td>
+                    <td th:text="${np.identificacionUsuario}"></td>
+                    <td th:text="${np.nombreUsuario}"></td>
+                    <td th:text="${np.satisfaccion}"></td>
                     <td>
-                        <a th:href="@{/tienda/eliminarComentario/{id}(id=${resena.id})}">Eliminar</a>
-                        <a th:href="@{/tienda/editarComentario/{id}(id=${resena.id})}" class="btn btn-warning">Editar</a>
+                        <a th:href="@{/tienda/eliminarNps/{id}(id=${np.id})}">Eliminar</a>
+                        <a th:href="@{/tienda/editarNps/{id}(id=${np.id})}" class="btn btn-warning">Editar</a>
                     </td>
                 </tr>
             </tbody>

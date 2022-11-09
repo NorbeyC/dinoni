@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.ProductoService;
+import edu.eci.arsw.dinoni.model.Nps;
 import edu.eci.arsw.dinoni.model.Producto;
 import edu.eci.arsw.dinoni.model.Resena;
 
@@ -103,6 +104,8 @@ public class ProductoController {
             mav.addObject("producto", producto);
             List<Resena> resenas = productoService.getResenasByProducto(producto.getNombre());
             mav.addObject("resenas", resenas);
+            List<Nps> nps = productoService.getNpsByProducto(producto.getNombre());
+            mav.addObject("nps", nps);
         } catch (Exception e) {
             mav.setViewName("error");
         } 

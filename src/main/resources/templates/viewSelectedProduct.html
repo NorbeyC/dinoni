@@ -33,9 +33,12 @@
             <div class="item" th:each="producto : ${producto}">
                 <div class="imagen">
                     <img th:src="${producto.imagen}" class="imgp">
-                    <div class="nps">
-                        <h5>Net Promoter Score Meter(en desarrollo)</h5>
+                    <div class="nps" th:each="np : ${nps}">
+                        <p th:text="${np.nombreUsuario}"></p>
+                        <p th:text="${np.satisfaccion}"></p>
                     </div>
+                    <h5>Net Promoter Score Meter(en desarrollo)</h5>
+                    <a href="nuevoNps" class="btn btn-success">Nueva Calificacion</a>
                 </div>
                 <div class="infop">
                     <div class="infoProducto">
@@ -68,8 +71,19 @@
                             <option value=3>3</option>
                             <option value=4>4</option>
                             <option value=5>5</option>
-                        </select>
+                        </select>                        
                         <a href="nuevoUsuario" class="btn btn-success">Comprar</a>
+                        <p id = "limit"></p>
+                        <script type="text/javascript" th:inline="javascript">
+                            const x = document.querySelector('#cantidad');
+                            x.addEventListener('change', (event) =>{
+                                let mensaje = document.querySelector('#limit');
+                                var limite = /*[[${producto.cantidad}]]*/ 'Cantidad';
+                                if(x.value > limite){
+                                    mensaje.innerHTML = "Solo quedan " + limite + " unidades disponibles";
+                                }
+                            });
+                        </script>
                     </div>
                     <div class="coms" >
                         <div class="res">
@@ -86,6 +100,7 @@
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

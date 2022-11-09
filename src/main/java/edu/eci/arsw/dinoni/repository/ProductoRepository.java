@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import edu.eci.arsw.dinoni.model.Nps;
 import edu.eci.arsw.dinoni.model.Producto;
 import edu.eci.arsw.dinoni.model.Resena;
 
@@ -21,6 +22,9 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     @Query("SELECT p FROM Resena p WHERE p.producto = ?1")
     List<Resena> findResena(String producto);
+
+    @Query("SELECT p FROM Nps p WHERE p.producto = ?1")
+    List<Nps> findNps(String producto);
 
     boolean existsByNombre(String nombre);
 

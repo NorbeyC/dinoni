@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.eci.arsw.dinoni.model.Nps;
 import edu.eci.arsw.dinoni.model.Producto;
 import edu.eci.arsw.dinoni.model.Resena;
 import edu.eci.arsw.dinoni.repository.ProductoRepository;
@@ -53,6 +54,10 @@ public class ProductoService {
 
     public List<Resena> getResenasByProducto(String producto){
         return productoRepository.findResena(producto);
+    }
+
+    public List<Nps> getNpsByProducto(String producto){
+        return productoRepository.findNps(producto);
     }
 
     /**
