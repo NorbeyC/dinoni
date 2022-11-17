@@ -100,7 +100,6 @@ INSERT INTO Productos( nombre, descripcion, precio, cantidad, categoria, estado,
 
 
 #Usuarios
-INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('admin','CC','0000','admin@admin.com','admin123',0000);
 INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('DIEGO LEON','CC','1135','diego@gmail.com','diego12345',3008556023);
 INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('NORBEY CARDONA','CC','2541','norbey@gmail.com','norbeychiquis',3214569878);
 INSERT INTO Usuarios(nombre,tipo_identificacion, identificacion, correo, passwd, telefono) VALUES('NICOLAS CASTRO','CC','6548','nicolas@hotmail.com','nico12',3657895123);

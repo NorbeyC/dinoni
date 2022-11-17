@@ -1,17 +1,27 @@
 package edu.eci.arsw.dinoni.security;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import edu.eci.arsw.dinoni.model.Usuario;
+import edu.eci.arsw.dinoni.service.UsuarioService;
 
 
 @Configuration
 public class WebSecurityConfig{
 
+    @Autowired
+    UsuarioService usuarioService;
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -23,7 +33,7 @@ public class WebSecurityConfig{
             .mvcMatchers("/tienda/editarProducto").hasAuthority("ADMIN")
             .mvcMatchers("/tienda/editarComentario").hasAuthority("ADMIN")
             .mvcMatchers("/tienda/editarNps").hasAuthority("ADMIN")
-            .antMatchers("/").hasAuthority("USER")
+            .antMatchers("/**").hasAuthority("USER")
             .anyRequest().authenticated()
             .and()
             .formLogin();
@@ -32,11 +42,17 @@ public class WebSecurityConfig{
 
     @Bean
     public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(User.withUsername("admin")
+        List<UserDetails> users = new ArrayList<>();
+        users.add(User.withUsername("admin")
                 .password("{noop}admin")
                 .authorities("ADMIN")
                 .build());
-        return userDetailsManager;
+        for(Usuario u: usuarioService.getAllUsuarios()){
+             users.add(User.withUsername(u.getNombre())
+                .password("{noop}"+u.getPasswd())
+                .authorities("USER")
+                .build());
+        }
+        return new InMemoryUserDetailsManager(users);
     }
 }
