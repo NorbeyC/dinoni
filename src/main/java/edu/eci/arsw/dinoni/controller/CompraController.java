@@ -52,7 +52,7 @@ public class CompraController {
         ModelAndView mav = new ModelAndView();
         try {
             Producto producto = productoService.getProductoByNombre(name).get();
-            mav.setViewName("compra");
+            mav.setViewName("compras");
             mav.addObject("producto", producto);
         } catch (Exception e) {
             mav.setViewName("error");

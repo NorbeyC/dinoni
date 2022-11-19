@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/compra.css" />
-    <link rel="icon" href="img/icono.ico" />
+    <link rel="stylesheet" href="/css/compra.css"/>
+    <link rel="icon" href="/img/icono.ico" />
 </head>
 <body>
     <div class="header">
         <div class="header-center">
-            <img src="/src/main/resources/static/img/logo.png" class="img">
+            <img src="/img/logo.png" class="img">
             <div class="search">
                 <form id="searchform">
                     <input id = 'search'  name="search" type="text" placeholder="Busca productos">
@@ -30,6 +29,7 @@
             </div>
         </div>
     </div>
+    <h1 style="padding: 9px;"><b>.</b></h1>
     <div class="container">
         <div class="item" th:each="producto : ${producto}">
             <div class="imagen">
@@ -63,7 +63,7 @@
         </div>
         <div class="datCompra">
             <div class="infoc">
-                <form th:action="@{/tienda/saveCompra}" th:object="${compra}" method = "POST">
+                <form action="" object="" method = "POST">
                     <div class="card-group">
                         <label>Medios de Pago: </label>
                         <div class="creditCardForm">
@@ -85,29 +85,34 @@
                                         <label>Fecha de expiración</label>
                                         <input type="date" class="form-control" id="expiration-date">
                                     </div>
+                                    <div class="form-group" id="credit_cards">
+                                        <img src="/img/visa.png" id="visa" style="width:50px">
+                                        <img src="/img/mastercard.png" id="mastercard" style="width:50px">
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="form-group-div">
-                    <br>
-                    <div class="form-group">
-                        <label>Dirección: </label>
-                        <input type="text" name="Identificacion" th:field="" class="form-control" placeholder="Direccion" required>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label>Nombre de quien recibe: </label>
-                        <input type="text" name="nombre" th:field="*{nombreUsuario}" class="" placeholder="Nombre" required>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label>Comentario: </label>
-                        <input type="text" name="comentario" th:field="*{comentario}" class="" placeholder="Dejar en la puerta" required>
-                    </div>                    
-                    <br>
-                    <div class="comprar">
-                        <button type="submit" class="btn btn-success">Finalizar Compra</button>
+                        <br>
+                        <div class="form-group">
+                            <label>Dirección: </label>
+                            <input type="text" name="Identificacion" field="" class="form-control" placeholder="Direccion" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Nombre de quien recibe: </label><br>
+                            <input type="text" name="nombre" field="" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Comentario: </label>
+                            <input type="text" name="comentario" field="" class="form-control" placeholder="Dejar en la puerta" required>
+                        </div>                    
+                        <br>
+                        <div class="comprar">
+                            <button type="submit" class="btn btn-success">Finalizar Compra</button>
+                        </div>
                     </div>
                 </form>
             </div>
