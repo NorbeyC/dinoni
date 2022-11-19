@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import edu.eci.arsw.dinoni.service.CompraService;
 import edu.eci.arsw.dinoni.model.Compra;
+import edu.eci.arsw.dinoni.model.Nps;
+import edu.eci.arsw.dinoni.model.Producto;
+import edu.eci.arsw.dinoni.model.Resena;
+import edu.eci.arsw.dinoni.service.CompraService;
+import edu.eci.arsw.dinoni.service.ProductoService;
 
 @Controller
 @RequestMapping("/tienda")
 public class CompraController {
+    @Autowired
+    ProductoService productoService;
     
     @Autowired
     CompraService compraService;
@@ -29,13 +37,27 @@ public class CompraController {
         return new ResponseEntity<List<Compra>>(compraService.getAllCompras(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/compras/id/{id}")
+    /*@GetMapping("/compras/id/{id}")
     public ResponseEntity<?> getCompraById(@PathVariable("id") long id){
         if(!compraService.existsById(id)){
             return new ResponseEntity<>("No se ha encontrado el Id de la Compra ",HttpStatus.NOT_FOUND);
         }
         Compra compra = compraService.getCompraById(id).get();
         return new ResponseEntity<>(compra, HttpStatus.ACCEPTED);
+    }*/
+
+
+    @GetMapping(value="/compras", params="name")
+    public ModelAndView viewSelectedProduct(@RequestParam String name){
+        ModelAndView mav = new ModelAndView();
+        try {
+            Producto producto = productoService.getProductoByNombre(name).get();
+            mav.setViewName("compra");
+            mav.addObject("producto", producto);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        } 
+        return mav;
     }
 
     @PostMapping("/saveCompra")

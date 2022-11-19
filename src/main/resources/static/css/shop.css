@@ -153,7 +153,6 @@ body { font-family:Arial, Helvetica, sans-serif; }
     color: #ffab95;
 }
 .containerBanner{
-    position:relative;
     top: 100px;
     margin: auto;
     background-color: white;

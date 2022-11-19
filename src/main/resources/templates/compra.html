@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DINONI-Compra</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/compra.css" />
+    <link rel="icon" href="img/icono.ico" />
+</head>
+<body>
+    <div class="header">
+        <div class="header-center">
+            <img src="/src/main/resources/static/img/logo.png" class="img">
+            <div class="search">
+                <form id="searchform">
+                    <input id = 'search'  name="search" type="text" placeholder="Busca productos">
+                    <button>
+                        <i class="fa fa-search" >Buscar</i>
+                    </button>
+                </form>
+            </div>
+            <div class="items-var">
+                <a href="/login.html"><i class="fa fa-user"></i> Iniciar Sesión</a>
+                <a href="#"><i class="fa fa-user"></i> Mis Pedidos</a>
+                <a href="#"><i class="fa fa-heart"></i> Carrito</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item" th:each="producto : ${producto}">
+            <div class="imagen">
+                <img th:src="${producto.imagen}" class="imgp">                
+            </div>
+            <div class="infop">
+                <div class="infoProducto">
+                    <b><p th:text="${producto.nombre}"></p></b>
+                    <p th:text="${producto.descripcion}"></p>
+                    <div style="display: flex;">
+                        <b><p style="font-size: small;">COP$</p></b>
+                        <b><p th:text="${producto.precio}"></p></b>
+                    </div>
+                    <div style="display: flex;">
+                        <p style="font-size: small;">Estado: </p>
+                        <p th:text="${producto.estado}" style="color:#ff7b5b; font-size: small;"></p>
+                    </div>
+                </div>
+                <div class="envio">
+                    <h3 style="font-size:140%;color:#00bd19;">Envío gratis</h3>
+                    <div id="current_date"></p>
+                        <script>
+                            date = new Date();
+                            day1 = date.getDate() + 1;
+                            day2 = date.getDate() + 2;
+                            document.getElementById("current_date").innerHTML = "Llega del " + day1 + " al " +  day2 + " de este mes.";
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="datCompra">
+            <div class="infoc">
+                <form th:action="@{/tienda/saveCompra}" th:object="${compra}" method = "POST">
+                    <div class="card-group">
+                        <label>Medios de Pago: </label>
+                        <div class="creditCardForm">
+                            <div class="payment">
+                                <form>
+                                    <div class="form-group" id="card-number-field">
+                                        <label for="cardNumber">Numero de Tarjeta</label>
+                                        <input type="text" class="form-control" id="cardNumber">
+                                    </div>
+                                    <div class="form-group owner">
+                                        <label for="owner">Propietario</label>
+                                        <input type="text" class="form-control" id="owner">
+                                    </div>
+                                    <div class="form-group CVV">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" class="form-control" id="cvv">
+                                    </div>
+                                    <div class="form-group" id="expiration-date">
+                                        <label>Fecha de expiración</label>
+                                        <input type="date" class="form-control" id="expiration-date">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group-div">
+                    <br>
+                    <div class="form-group">
+                        <label>Dirección: </label>
+                        <input type="text" name="Identificacion" th:field="" class="form-control" placeholder="Direccion" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Nombre de quien recibe: </label>
+                        <input type="text" name="nombre" th:field="*{nombreUsuario}" class="" placeholder="Nombre" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Comentario: </label>
+                        <input type="text" name="comentario" th:field="*{comentario}" class="" placeholder="Dejar en la puerta" required>
+                    </div>                    
+                    <br>
+                    <div class="comprar">
+                        <button type="submit" class="btn btn-success">Finalizar Compra</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
