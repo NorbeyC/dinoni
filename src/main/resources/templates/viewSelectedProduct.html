@@ -12,18 +12,18 @@
     <body>
         <div class="header">
             <div class="header-center">
-                <img src="/img/logo.png" class="img">
+                <a href="viewProductos"><img src="/img/logo.png" class="img"></a>
                 <div class="search">
                     <form id="searchform">
-                        <input id = 'search'  name="search" type="text" placeholder="Busca productos">
+                        <input id = 'search'  name="search" type="text" placeholder="Busca productos" readonly>
                         <button>
                             <i class="fa fa-search" >Buscar</i>
                             </button>
                     </form>
                 </div>
                 <div class="items-var">
-                    <a href="/login.html"><i class="fa fa-user"></i> Iniciar Sesión</a>
-                    <a href="#"><i class="fa fa-user"></i> Mis Pedidos</a>
+                    <a href="/login"><i class="fa fa-user"></i> Iniciar Sesión</a>
+                    <a href="/login.html"><i class="fa fa-user"></i>Registrarse</a>
                     <a href="#"><i class="fa fa-heart"></i> Carrito</a>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         <p th:text="${np.satisfaccion}"></p>
                     </div>
                     <h5>Net Promoter Score Meter(en desarrollo)</h5>
-                    <a href="nuevoNps" class="btn btn-success">Nueva Calificacion</a>
+                    <a href="nuevoNps" th:href="@{nuevoNps(name=${producto.nombre})}" class="btn btn-success">Nueva Calificacion</a>
                 </div>
                 <div class="infop">
                     <div class="infoProducto">
@@ -72,7 +72,7 @@
                             <option value=4>4</option>
                             <option value=5>5</option>
                         </select>                        
-                        <a href="nuevoUsuario" class="btn btn-success">Comprar</a>
+                        <a href="compras" th:href="@{compras(name=${producto.nombre})}" class="btn btn-success">Comprar</a>
                         <p id = "limit"></p>
                         <script type="text/javascript" th:inline="javascript">
                             const x = document.querySelector('#cantidad');
@@ -96,7 +96,7 @@
                         <br>
                         <div class="insertCom">
                             <form id="insertRes">
-                                <a href="nuevoComentario" class="btn btn-success">Nuevo Comentario</a>
+                                <a href="nuevoComentario" th:href="@{nuevoComentario(name=${producto.nombre})}" class="btn btn-success">Nuevo Comentario</a>
                             </form>
                         </div>
                     </div>

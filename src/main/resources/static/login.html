@@ -16,14 +16,11 @@
   <div id="container">
     <div id="login" >
       <img src="img/logo.png" class="img">
+      <br>
+      <br>
       <div class="title">
-        <h1>Bienvenido</h1>
+        <h3>Bienvenido</h3>
       </div>
-      <form id="loginform" th:action="@{/tienda/ingresar}" method="post">
-        <input id = 'email'  name="email" type="email" placeholder="Correo" required>
-        <input id = 'password' name="password" type="password" placeholder="Contraseña" required>
-        <button  type="submit" onclick='' class='btn'>Login</button>
-      </form>
       <div class="reg">
         <a href="/tienda/nuevoUsuario">Registrarse</a>
       </div>

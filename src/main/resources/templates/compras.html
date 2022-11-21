@@ -13,18 +13,18 @@
 <body>
     <div class="header">
         <div class="header-center">
-            <img src="/img/logo.png" class="img">
+            <a href="viewProductos"><img src="/img/logo.png" class="img"></a>
             <div class="search">
                 <form id="searchform">
-                    <input id = 'search'  name="search" type="text" placeholder="Busca productos">
+                    <input id = 'search'  name="search" type="text" placeholder="Busca productos" readonly>
                     <button>
                         <i class="fa fa-search" >Buscar</i>
                     </button>
                 </form>
             </div>
             <div class="items-var">
-                <a href="/login.html"><i class="fa fa-user"></i> Iniciar Sesión</a>
-                <a href="#"><i class="fa fa-user"></i> Mis Pedidos</a>
+                <a href="/login"><i class="fa fa-user"></i> Iniciar Sesión</a>
+                <a href="/login.html"><i class="fa fa-user"></i>Registrarse</a>
                 <a href="#"><i class="fa fa-heart"></i> Carrito</a>
             </div>
         </div>
@@ -61,7 +61,20 @@
                 </div>
             </div>
         </div>
-        <div class="datCompra">
+        <div class="datCompra" th:each="usuario : ${usuario}">
+            <div class="infoUsuario">
+                <h3 style="font-size: 100%; color: #00bd19;">Datos de envío</h3>
+                <div class="info">
+                    <p style="font-size: small;">Nombre: </p>
+                    <p th:text="${usuario.nombre}" style="font-size: small;"></p>
+                    <p style="font-size: small;">Identificacion: </p>
+                    <p th:text="${usuario.identificacion} " style="font-size: small;"></p>
+                    <p style="font-size: small;">Correo: </p>
+                    <p th:text="${usuario.correo}" style="font-size: small;"></p>
+                    <p style="font-size: small;">Telefono: </p>
+                    <p th:text="${usuario.telefono}" style="font-size: small;"></p>
+                </div>
+            </div>
             <div class="infoc">
                 <form action="" object="" method = "POST">
                     <div class="card-group">
@@ -108,7 +121,8 @@
                         <div class="form-group">
                             <label>Comentario: </label>
                             <input type="text" name="comentario" field="" class="form-control" placeholder="Dejar en la puerta" required>
-                        </div>                    
+                            
+                        </div>             
                         <br>
                         <div class="comprar">
                             <button type="submit" class="btn btn-success">Finalizar Compra</button>

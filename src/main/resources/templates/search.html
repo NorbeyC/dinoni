@@ -14,7 +14,7 @@
             <div class="header-center">
                 <a href="/index.html"><img src="/img/logo.png" class="img"></a>
                 <div class="search">
-                    <form id="searchform" >
+                    <form id="searchform">
                         <input id = 'search'  name="search" type="text" placeholder="Busca productos">
                         <button>
                             <i class="fa fa-search" >Buscar</i>
@@ -29,32 +29,8 @@
             </div>
         </div>
         <h1 style="padding: 12px;"><b>.</b></h1>
-        <div class="containerBanner">
-            <ul class="slider">
-                <li id="slide1">
-                    <a href=""><img src="/img/GalaxyS22.jpg"></a>
-                </li>
-                <li id="slide2">
-                    <a href=""><img src="/img/huawei-p50-pro.jpg"/></a>
-                </li>
-                <li id="slide3">
-                    <a href=""><img src="/img/zfold.jpg"/></a>
-                </li>
-            </ul>
-            <ul class="menu">
-                <li>
-                    <a href="#slide1">1</a>
-                </li>
-                <li>
-                    <a href="#slide2">2</a>
-                </li>
-                <li>
-                    <a href="#slide3">3</a>
-                </li>
-            </ul>
-        </div>
-        <h1 style="padding: 40px;"><b></b></h1>
-        <h1 class="cat" style="color:#ebc900;"><b>Catálogo Productos</b></h1>
+        <h1 style="padding: 01px;"><b></b></h1>
+        <h1 class="cat" style="color:#ebc900;"><b>Productos Encontrados: </b></h1>
         <div class="container">
             <div class="item" th:each="producto : ${productos}">
                 <div class="imagen">

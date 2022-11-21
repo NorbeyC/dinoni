@@ -1,6 +1,7 @@
 package edu.eci.arsw.dinoni.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -88,6 +89,19 @@ public class ProductoController {
         try {
             List<Producto> productos = productoService.getAllProductos();
             mav.setViewName("viewProductos");
+            mav.addObject("productos", productos);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        } 
+        return mav;
+    }
+
+    @GetMapping(value = "/viewProductos", params = "search")
+    public ModelAndView searchProducto(@RequestParam("search") String search){
+        ModelAndView mav = new ModelAndView();
+        try {
+            List<Producto> productos = productoService.getAllProductos().stream().filter(p -> p.getNombre().contains(search)).collect(Collectors.toList());
+            mav.setViewName("search");
             mav.addObject("productos", productos);
         } catch (Exception e) {
             mav.setViewName("error");

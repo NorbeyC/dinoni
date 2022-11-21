@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.ResenaService;
+import edu.eci.arsw.dinoni.service.UsuarioService;
 import edu.eci.arsw.dinoni.model.Resena;
+import edu.eci.arsw.dinoni.model.Usuario;
 
 
 @Controller
@@ -26,6 +31,9 @@ public class ResenaController {
 
     @Autowired
     ResenaService resenaService;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @GetMapping("/allResenas")
     public ResponseEntity<List<Resena>> getAllResenas(){
@@ -70,12 +78,21 @@ public class ResenaController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("nuevoComentario")
-    public ModelAndView nuevoComentario(){
+    @GetMapping(value = "nuevoComentario", params = "name")
+    public ModelAndView nuevoComentario(@RequestParam("name") String name) {
         ModelAndView mav = new ModelAndView();
         Resena resena = new Resena();
-        mav.setViewName("nuevoComentario");
-        mav.addObject("resena",resena);
+        try {
+            String producto = name;
+            UserDetails UserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Usuario usuario = usuarioService.getUsuarioByNombre(UserDetails.getUsername()).get();
+            mav.setViewName("nuevoComentario");
+            mav.addObject("resena",resena);
+            mav.addObject("productoName",producto);
+            mav.addObject("usuario",usuario);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        }
         return mav;
     }
     

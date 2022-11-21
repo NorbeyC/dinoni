@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,44 +19,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.model.Compra;
-import edu.eci.arsw.dinoni.model.Nps;
 import edu.eci.arsw.dinoni.model.Producto;
-import edu.eci.arsw.dinoni.model.Resena;
+import edu.eci.arsw.dinoni.model.Usuario;
 import edu.eci.arsw.dinoni.service.CompraService;
 import edu.eci.arsw.dinoni.service.ProductoService;
+import edu.eci.arsw.dinoni.service.UsuarioService;
 
 @Controller
 @RequestMapping("/tienda")
 public class CompraController {
+
     @Autowired
     ProductoService productoService;
     
     @Autowired
     CompraService compraService;
 
+    @Autowired
+    UsuarioService usuarioService;
+
     @GetMapping("/allCompras")
     public ResponseEntity<List<Compra>> getAllCompras(){
         return new ResponseEntity<List<Compra>>(compraService.getAllCompras(), HttpStatus.ACCEPTED);
     }
 
-    /*@GetMapping("/compras/id/{id}")
-    public ResponseEntity<?> getCompraById(@PathVariable("id") long id){
-        if(!compraService.existsById(id)){
-            return new ResponseEntity<>("No se ha encontrado el Id de la Compra ",HttpStatus.NOT_FOUND);
-        }
-        Compra compra = compraService.getCompraById(id).get();
-        return new ResponseEntity<>(compra, HttpStatus.ACCEPTED);
-    }*/
-
-
     @GetMapping(value="/compras", params="name")
-    public ModelAndView viewSelectedProduct(@RequestParam String name){
+    public ModelAndView compras(@RequestParam String name){
         ModelAndView mav = new ModelAndView();
         try {
+            UserDetails UserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Usuario usuario = usuarioService.getUsuarioByNombre(UserDetails.getUsername()).get();
             Producto producto = productoService.getProductoByNombre(name).get();
             mav.setViewName("compras");
             mav.addObject("producto", producto);
+            mav.addObject("usuario", usuario);
         } catch (Exception e) {
+            System.out.println(e);
             mav.setViewName("error");
         } 
         return mav;

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.service.NpsService;
+import edu.eci.arsw.dinoni.service.UsuarioService;
 import edu.eci.arsw.dinoni.model.Nps;
+import edu.eci.arsw.dinoni.model.Usuario;
 
 @Controller
 @RequestMapping("/tienda")
@@ -25,6 +30,9 @@ public class NpsController {
     
     @Autowired
     NpsService npsService;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @GetMapping("/allNps")
     public ResponseEntity<List<Nps>> getAllNps(){
@@ -69,12 +77,22 @@ public class NpsController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
     
-    @GetMapping("nuevoNps")
-    public ModelAndView nuevoNps(){
+    @GetMapping(value = "nuevoNps", params = "name")
+    public ModelAndView nuevoNps(@RequestParam("name") String name) {
         ModelAndView mav = new ModelAndView();
         Nps nps = new Nps();
-        mav.setViewName("nuevoNps");
-        mav.addObject("nps", nps);
+        try {
+            String producto = name;
+            UserDetails UserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Usuario usuario = usuarioService.getUsuarioByNombre(UserDetails.getUsername()).get();
+            mav.setViewName("nuevoNps");
+            mav.addObject("nps", nps);
+            mav.addObject("productoName",producto);
+            mav.addObject("usuario",usuario);
+        } catch (Exception e) {
+            mav.setViewName("error");
+        }
+        
         return mav;
     }
 
