@@ -48,6 +48,26 @@
                         <p th:text="${producto.estado}" style="color:#ff7b5b; font-size: small;"></p>
                     </div>
                 </div>
+                <div class="añadir">
+                    <select name="cantidad" id="cantidad">
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                    </select>                        
+                    <p id = "limit"></p>
+                    <script type="text/javascript" th:inline="javascript">
+                        const x = document.querySelector('#cantidad');
+                        x.addEventListener('change', (event) =>{
+                            let mensaje = document.querySelector('#limit');
+                            var limite = /*[[${producto.cantidad}]]*/ 'Cantidad';
+                            if(x.value > limite){
+                                mensaje.innerHTML = "Solo quedan " + limite + " unidades disponibles";
+                            }
+                        });
+                    </script>
+                </div>
                 <div class="envio">
                     <h3 style="font-size:140%;color:#00bd19;">Envío gratis</h3>
                     <div id="current_date"></p>
