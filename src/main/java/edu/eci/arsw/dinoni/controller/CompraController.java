@@ -48,6 +48,7 @@ public class CompraController {
         ModelAndView mav = new ModelAndView();
         try {
             UserDetails UserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            System.out.println(UserDetails.getUsername() + " " + UserDetails.getPassword());
             Usuario usuario = usuarioService.getUsuarioByNombre(UserDetails.getUsername()).get();
             Producto producto = productoService.getProductoByNombre(name).get();
             mav.setViewName("compras");

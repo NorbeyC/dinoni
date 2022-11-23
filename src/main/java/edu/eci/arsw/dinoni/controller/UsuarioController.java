@@ -81,10 +81,16 @@ public class UsuarioController {
     }
 
     @PostMapping("/saveUsuario")
-    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario){
+    public String saveUsuario(@ModelAttribute("usuario") Usuario usuario) throws Exception{
+        try {
+            if(!usuarioService.existsByNombre(usuario.getNombre())){
+                usuarioService.saveUsuario(usuario);
+            }
+        } catch (Exception e) {
+            return "redirect:/tienda/nuevoUsuario";
+        }
         usuarioService.saveUsuario(usuario);
         return "redirect:/";
     }
-
     
 }
