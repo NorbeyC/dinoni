@@ -25,7 +25,7 @@ public class MensajeController {
     UsuarioService usuarioService;
 
     @MessageMapping("/chat.register")
-    @SendTo
+    @SendTo("/topic/public")
     public Mensaje register(@Payload Mensaje chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         Map<String, Object> sessionAttributes = headerAccessor.getSessionAttributes();
         if(sessionAttributes != null) {
