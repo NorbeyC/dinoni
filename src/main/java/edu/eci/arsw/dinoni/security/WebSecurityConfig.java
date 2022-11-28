@@ -45,6 +45,7 @@ public class WebSecurityConfig{
             .antMatchers("/tienda/compras").hasAuthority("USER")
             .antMatchers("/tienda/nuevoComentario").hasAuthority("USER")
             .antMatchers("/tienda/nuevoNps").hasAuthority("USER")
+            .antMatchers("/tienda/chat").hasAuthority("USER")
             .antMatchers("/**").permitAll()
             .anyRequest().authenticated()
             .and()
