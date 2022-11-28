@@ -10,14 +10,20 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
+var producto = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
-    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+    '#ffc107', '#ff85af', '#FF9800', '#39bbb0',
+    '#ff0000','#00ff00','#0000ff','#ffff00',
+    '#00ffff','#ff00ff','#000000','#800000',
+    '#808000','#008000','#800080', '#008080',
+    '#000080','#808080','#c0c0c0'
 ];
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
+    producto = document.querySelector('#producto').value.trim();
 
     if(username) {
         usernamePage.classList.add('hidden');
@@ -55,7 +61,7 @@ function send(event) {
 
     if(messageContent && stompClient) {
         var chatMessage = {
-            sender: username,
+            sender: username + " - " + producto,
             content: messageInput.value,
             type: 'CHAT'
         };

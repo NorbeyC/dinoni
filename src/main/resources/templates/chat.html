@@ -13,10 +13,13 @@
 
 <div id="username-page" th:each="usuario : ${usuario}">
     <div class="username-page-container" style="background-color: #c49532;">
-        <h1 class="title">Nombre</h1>
+        <h1>BIENVENIDO A NUESTRO CHAT</h1>
+        <h2 class="title">Nombre - Producto de Interes</h2>
         <form id="usernameForm" name="usernameForm">
-            <div class="form-group">
+            <div class="form-group" th:each="producto : ${producto}">
                 <input type="text" id="name" th:value="${usuario.nombre}" th:placeholder="${usuario.nombre}"
+                       autocomplete="off" class="form-control" readonly/>
+                <input type="text" id="producto" th:value="${producto}" th:placeholder="${producto}"
                        autocomplete="off" class="form-control" readonly/>
             </div>
             <div class="form-group">

@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.eci.arsw.dinoni.model.Mensaje;
@@ -40,19 +41,19 @@ public class MensajeController {
         return chatMessage;
     }
 
-    @GetMapping("/tienda/chat")
-    public ModelAndView chat() {
+    @GetMapping(value="/tienda/chat",params = "producto")
+    public ModelAndView chat(@RequestParam("producto") String producto) {
         ModelAndView mav = new ModelAndView();
         try {
             UserDetails UserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Usuario usuario = usuarioService.getUsuarioByNombre(UserDetails.getUsername()).get();
             mav.setViewName("chat");
             mav.addObject("usuario", usuario);
+            mav.addObject("producto", producto);
         } catch (Exception e) {
             System.out.println(e);
             mav.setViewName("error");
         }
-        
         return mav;
     }
 }
