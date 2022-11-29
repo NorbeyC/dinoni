@@ -4,6 +4,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/product.css" />
+        <link rel="stylesheet" href="/css/grafico.css">
         <link rel="icon" href="/img/icono.ico" />    
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@
             } 
             </style>
     </head>
-    <body>
+    <body style="background-color: #e7e6e6;">
         <div class="header">
             <div class="header-center">
                 <a href="viewProductos"><img src="/img/logo.png" class="img"></a>
@@ -51,12 +52,40 @@
             <div class="item" th:each="producto : ${producto}">
                 <div class="imagen">
                     <img th:src="${producto.imagen}" class="imgp">
-                    <div class="nps" th:each="np : ${nps}">
-                        <p th:text="${np.nombreUsuario}"></p>
-                        <p th:text="${np.satisfaccion}"></p>
+                    <div class="wrapper">
+                        <div>
+                            <div class="line"></div>
+                            <div class="number n0">0</div>
+                            <div class="number n25">1.3</div>
+                            <div class="number n90">2.5</div>
+                            <div class="number n75">3.8</div>
+                            <div class="number n180">5.0</div>
+                            <div class="circle2"></div>
+                            <div class="circle1"></div>
+                        </div>
+                        <script type="text/javascript" th:inline="javascript"> 
+                            setInterval(moverNumber, 1000);
+                            function moverNumber() {
+                                var number = 0;
+                                var cantidad = 0;
+                                /*<![CDATA[*/
+                                        /*[# th:each="np : ${nps}"]*/
+                                            var nps = /*[[${np.satisfaccion}]]*/ 0;  
+                                            cantidad += 1;
+                                            number = number + nps;                                       
+                                        /*[/]*/               
+                                /*]]>*/
+                                var promedio = number/cantidad;
+                                let perCent=(promedio*100)/5.0;
+                                perCent=perCent<=100?perCent:100;
+                                const result=((perCent*180)/100)+90;
+                                const line = document.querySelector('.line');
+                                line.style.transform = `rotate(${result}deg)`;
+                            };
+                        </script>
+                        <br>
+                        <a href="nuevoNps" th:href="@{nuevoNps(name=${producto.nombre})}" class="btn btn-dark">Nueva Calificacion</a>
                     </div>
-                    <h5>Net Promoter Score Meter(en desarrollo)</h5>
-                    <a href="nuevoNps" th:href="@{nuevoNps(name=${producto.nombre})}" class="btn btn-success">Nueva Calificacion</a>
                 </div>
                 <div class="infop">
                     <div class="infoProducto">
@@ -90,7 +119,7 @@
                             <option value=4>4</option>
                             <option value=5>5</option>
                         </select>                        
-                        <a href="compras" th:href="@{compras(name=${producto.nombre})}" class="btn btn-success">Comprar</a>
+                        <a href="compras" th:href="@{compras(name=${producto.nombre})}" class="btn btn-dark">Comprar</a>
                         <p id = "limit"></p>
                         <script type="text/javascript" th:inline="javascript">
                             const x = document.querySelector('#cantidad');
@@ -114,7 +143,7 @@
                         <br>
                         <div class="insertCom">
                             <form id="insertRes">
-                                <a href="nuevoComentario" th:href="@{nuevoComentario(name=${producto.nombre})}" class="btn btn-success">Nuevo Comentario</a>
+                                <a href="nuevoComentario" th:href="@{nuevoComentario(name=${producto.nombre})}" class="btn btn-dark">Nuevo Comentario</a>
                             </form>
                         </div>
                     </div>
