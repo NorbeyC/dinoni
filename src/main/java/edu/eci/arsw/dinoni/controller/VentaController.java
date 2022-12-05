@@ -24,11 +24,20 @@ public class VentaController {
     @Autowired
     VentaService ventaService;
 
+    /**
+     * Metodo que retorna todas las ventas
+     * @return
+     */
     @GetMapping("/allVentas")
     public ResponseEntity<List<Venta>> getAllVentas(){
         return new ResponseEntity<List<Venta>>(ventaService.getAllVentas(), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna una venta por su ID
+     * @param id
+     * @return
+     */
     @GetMapping("/ventas/id/{id}")
     public ResponseEntity<?> getVentaById(@PathVariable("id") long id){
         if(!ventaService.existsById(id)){
@@ -38,6 +47,11 @@ public class VentaController {
         return new ResponseEntity<>(venta, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que guarda una venta
+     * @param venta
+     * @return
+     */
     @PostMapping("/saveVenta")
     public ResponseEntity<?> saveVenta(@RequestBody Venta venta){
         try {
@@ -49,6 +63,11 @@ public class VentaController {
         }
     }
 
+    /**
+     * Metodo que elimina una venta
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteVenta/{id}")
     public ResponseEntity<?> deleteVenta(@PathVariable("id") long id){
         if(!ventaService.existsById(id)){
@@ -58,6 +77,12 @@ public class VentaController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza una venta
+     * @param id
+     * @param venta
+     * @return
+     */
     @PutMapping("/updateVenta/{id}")
     public ResponseEntity<?> updateVenta(@PathVariable("id") long id, @RequestBody Venta venta){
         if(!ventaService.existsById(id)){

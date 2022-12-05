@@ -30,11 +30,20 @@ public class ProductoController {
     @Autowired
     ProductoService productoService;
 
+    /**
+     * Metodo que retorna todos los productos en formato JSON
+     * @return
+     */
     @GetMapping("/allProductos")
     public ResponseEntity<List<Producto>> getAllProductos(){
         return new ResponseEntity<List<Producto>>(productoService.getAllProductos(), HttpStatus.ACCEPTED);
     }
     
+    /**
+     * Metodo que retorna un producto por su ID
+     * @param id
+     * @return
+     */
     @GetMapping("/productos/id/{id}")
     public ResponseEntity<?> getProductoById(@PathVariable("id") long id){
         if(!productoService.existsById(id)){
@@ -44,6 +53,11 @@ public class ProductoController {
         return new ResponseEntity<>(producto, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna un producto por su nombre
+     * @param nombre
+     * @return
+     */
     @GetMapping("/productos/nombre/{name}")
     public ResponseEntity<?> getProductoByName(@PathVariable("name") String nombre){
         if(!productoService.existsByNombre(nombre)){
@@ -53,6 +67,11 @@ public class ProductoController {
         return new ResponseEntity<>(producto, HttpStatus.ACCEPTED);
     }
     
+    /**
+     * Metodo que guarda un producto
+     * @param producto
+     * @return
+     */
     @PostMapping("/saveProducto")
     public ResponseEntity<?> saveProducto(@RequestBody Producto producto){
         try {
@@ -64,7 +83,11 @@ public class ProductoController {
         }
     }
 
-    
+    /**
+     * Metodo que elimina un producto
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteProducto/{id}")
     public ResponseEntity<?> deleteProducto(@PathVariable("id") long id){
         if(!productoService.existsById(id)){
@@ -74,6 +97,12 @@ public class ProductoController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza un producto
+     * @param id
+     * @param producto
+     * @return
+     */
     @PutMapping("/updateProducto/{id}")
     public ResponseEntity<?> updateProducto(@PathVariable("id") long id, @RequestBody Producto producto){
         if(!productoService.existsById(id)){
@@ -83,6 +112,10 @@ public class ProductoController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del catalogo de productos
+     * @return
+     */
     @GetMapping("/viewProductos")
     public ModelAndView viewProductos(){
         ModelAndView mav = new ModelAndView();
@@ -96,6 +129,11 @@ public class ProductoController {
         return mav;
     }
 
+    /**
+     * Metodo que busca un producto por su nombre y retorna el ModelAndView del catalogo de los productos encontrados 
+     * @param search
+     * @return
+     */
     @GetMapping(value = "/viewProductos", params = "search")
     public ModelAndView searchProducto(@RequestParam("search") String search){
         ModelAndView mav = new ModelAndView();
@@ -109,6 +147,11 @@ public class ProductoController {
         return mav;
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del producto seleccionado
+     * @param name
+     * @return
+     */
     @GetMapping(value="/viewSelectedProduct", params="name")
     public ModelAndView viewSelectedProduct(@RequestParam String name){
         ModelAndView mav = new ModelAndView();
@@ -126,6 +169,10 @@ public class ProductoController {
         return mav;
     }
 
+    /**
+     * Metodo que retorna el ModelAndView de nuevoProducto(Formulario)
+     * @return
+     */
     @GetMapping("nuevoProducto")
     public ModelAndView nuevoProducto(){
         ModelAndView mav = new ModelAndView();
@@ -135,12 +182,23 @@ public class ProductoController {
         return mav;
     }
 
+    /**
+     * Metodo que agrega un nuevo producto estilo formulario
+     * @param producto
+     * @return
+     */
     @PostMapping("/saveProduct")
     public String saveProduct(@ModelAttribute("producto") Producto producto){
         productoService.saveProducto(producto);
         return "redirect:/tienda/productsManagement";
     }
 
+    /**
+     * Metodo que actualiza un producto
+     * @param id
+     * @param producto
+     * @return
+     */
     @PostMapping("/actualizarProducto/{id}")
     public String actualizarProducto(@PathVariable("id") long id, @ModelAttribute("producto") Producto producto){
         if(!productoService.existsById(id)){
@@ -150,6 +208,11 @@ public class ProductoController {
         return "redirect:/tienda/productsManagement";
     }
 
+    /**
+     * Metodo que retorna el ModelAndView de actualizarProducto
+     * @param id
+     * @return
+     */
     @GetMapping("editarProducto/{id}")
     public ModelAndView actualizarProducto(@PathVariable("id") long id){
         ModelAndView mav = new ModelAndView();
@@ -159,6 +222,11 @@ public class ProductoController {
         return mav;
     }
 
+    /**
+     * Metodo que elimina un producto
+     * @param id
+     * @return
+     */
     @GetMapping("/eliminarProducto/{id}")
     public String eliminarProducto(@PathVariable("id") long id){
         if(productoService.existsById(id)){
@@ -168,6 +236,10 @@ public class ProductoController {
     }
 
 
+    /**
+     * Metodo que retorna el ModelAndView del Management de productos
+     * @return
+     */
     @GetMapping(value="productsManagement")
     public ModelAndView productsManagement(){
         ModelAndView mav = new ModelAndView();

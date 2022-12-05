@@ -38,11 +38,21 @@ public class CompraController {
     @Autowired
     UsuarioService usuarioService;
 
+
+    /**
+     * Metodo que retorna todas las compras en formato JSON
+     * @return
+     */
     @GetMapping("/allCompras")
     public ResponseEntity<List<Compra>> getAllCompras(){
         return new ResponseEntity<List<Compra>>(compraService.getAllCompras(), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que devuelve el ModelAndView de compras
+     * @param name
+     * @return
+     */
     @GetMapping(value="/compras", params="name")
     public ModelAndView compras(@RequestParam String name){
         ModelAndView mav = new ModelAndView();
@@ -61,6 +71,11 @@ public class CompraController {
         return mav;
     }
 
+    /**
+     * Metodo que guarda una compra
+     * @param compra
+     * @return
+     */
     @PostMapping("/saveCompra")
     public ResponseEntity<?> saveCompra(@RequestBody Compra compra){
         try {
@@ -72,8 +87,12 @@ public class CompraController {
         }
     }
 
+    /**
+     * Metodo que elimina una compra
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteCompra/{id}")
-
     public ResponseEntity<?> deleteCompra(@PathVariable("id") long id){
         if(!compraService.existsById(id)){
             return new ResponseEntity<>("No se ha encontrado el Id de la Compra ",HttpStatus.NOT_FOUND);
@@ -82,6 +101,12 @@ public class CompraController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza una compra
+     * @param id
+     * @param compra
+     * @return
+     */
     @PutMapping("/updateCompra/{id}")
     public ResponseEntity<?> updateCompra(@PathVariable("id") long id, @RequestBody Compra compra){
         if(!compraService.existsById(id)){

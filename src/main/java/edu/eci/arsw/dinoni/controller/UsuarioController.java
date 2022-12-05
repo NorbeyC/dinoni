@@ -28,11 +28,20 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
     
+    /**
+     * Metodo que retorna todos los usarios en formato JSON
+     * @return
+     */
     @GetMapping("/allUsuarios")
     public ResponseEntity<List<Usuario>> getAllUsuarios(){
         return new ResponseEntity<List<Usuario>>(usuarioService.getAllUsuarios(), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna un usuario por su ID
+     * @param id
+     * @return
+     */
     @GetMapping("/usuarios/id/{id}")
     public ResponseEntity<?> getUsuarioById(@PathVariable("id") long id){
         if(!usuarioService.existsById(id)){
@@ -42,6 +51,11 @@ public class UsuarioController {
         return new ResponseEntity<>(usuario, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que agrega un nuevo usuario
+     * @param usuario
+     * @return
+     */
     @PostMapping("/newUsuario")
     public ResponseEntity<?> newUsuario(@RequestBody Usuario usuario){
         try {
@@ -53,6 +67,11 @@ public class UsuarioController {
         }
     }
 
+    /**
+     * Metodo que elimina un usuario
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteUsuario/{id}")
     public ResponseEntity<?> deleteUsuario(@PathVariable("id") long id){
         if(!usuarioService.existsById(id)){
@@ -62,6 +81,12 @@ public class UsuarioController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza un usuario
+     * @param id
+     * @param usuario
+     * @return
+     */
     @PutMapping("/updateUsuario/{id}")
     public ResponseEntity<?> updateUsuario(@PathVariable("id") long id, @RequestBody Usuario usuario){
         if(!usuarioService.existsById(id)){
@@ -71,6 +96,10 @@ public class UsuarioController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del formulario de nuevo usuario
+     * @return
+     */
     @GetMapping("nuevoUsuario")
     public ModelAndView nuevoUsuario(){
         ModelAndView mav = new ModelAndView();
@@ -80,6 +109,12 @@ public class UsuarioController {
         return mav;
     }
 
+    /**
+     * Metodo que guarda un nuevo Usuario
+     * @param usuario
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/saveUsuario")
     public String saveUsuario(@ModelAttribute("usuario") Usuario usuario) throws Exception{
         try {

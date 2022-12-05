@@ -31,6 +31,12 @@ public class WebSecurityConfig{
     @Autowired
     UsuarioService usuarioService;
     
+    /**
+     * Implementa la seguridad, da acceso a las paginas de acuerdo al rol del usuario
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -53,6 +59,10 @@ public class WebSecurityConfig{
         return http.build();
     }
 
+    /**
+     * Agrega los usuarios y les asigna el rol
+     * @return
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         List<UserDetails> users = new ArrayList<>();
@@ -69,6 +79,10 @@ public class WebSecurityConfig{
         return new InMemoryUserDetailsManager(users);
     }
 
+    /**
+     * Encripta la contraseña
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

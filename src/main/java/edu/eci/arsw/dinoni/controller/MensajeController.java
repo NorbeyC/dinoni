@@ -25,6 +25,12 @@ public class MensajeController {
     @Autowired
     UsuarioService usuarioService;
 
+    /**
+     * Metodo que se encarga del registro del usuario al chat
+     * @param chatMessage
+     * @param headerAccessor
+     * @return
+     */
     @MessageMapping("/chat.register")
     @SendTo("/topic/public")
     public Mensaje register(@Payload Mensaje chatMessage, SimpMessageHeaderAccessor headerAccessor) {
@@ -35,12 +41,22 @@ public class MensajeController {
         return chatMessage;
     }
 
+    /**
+     * Metodo que se encarga de enviar un mensaje
+     * @param chatMessage
+     * @return
+     */
     @MessageMapping("/chat.send")
     @SendTo("/topic/public")
     public Mensaje sendMessage(@Payload Mensaje chatMessage) {
         return chatMessage;
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del chat
+     * @param producto
+     * @return
+     */
     @GetMapping(value="/tienda/chat",params = "producto")
     public ModelAndView chat(@RequestParam("producto") String producto) {
         ModelAndView mav = new ModelAndView();

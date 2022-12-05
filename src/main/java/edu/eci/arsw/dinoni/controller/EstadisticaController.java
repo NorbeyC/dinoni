@@ -24,11 +24,20 @@ public class EstadisticaController {
     @Autowired
     EstadisticaService estadisticaService;
 
+    /**
+     * Metodo que retorna todas las estadisticas en formato JSON
+     * @return
+     */
     @GetMapping("/allEstadisticas")
     public ResponseEntity<List<Estadistica>> getAllEstadisticas(){
         return new ResponseEntity<List<Estadistica>>(estadisticaService.getAllEstadisticas(), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna una estadistica por su ID
+     * @param id
+     * @return
+     */
     @GetMapping("/estadisticas/id/{id}")
     public ResponseEntity<?> getEstadisticaById(@PathVariable("id") long id){
         if(!estadisticaService.existsById(id)){
@@ -38,6 +47,11 @@ public class EstadisticaController {
         return new ResponseEntity<>(estadistica, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que guarda una estadistica
+     * @param estadistica
+     * @return
+     */
     @PostMapping("/saveEstadistica")
     public ResponseEntity<?> saveEstadistica(@RequestBody Estadistica estadistica){
         try {
@@ -49,6 +63,11 @@ public class EstadisticaController {
         }
     }
 
+    /**
+     * Metodo que elimina una estadistica
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteEstadistica/{id}")
     public ResponseEntity<?> deleteEstadistica(@PathVariable("id") long id){
         if(!estadisticaService.existsById(id)){
@@ -58,6 +77,12 @@ public class EstadisticaController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza una estadistica
+     * @param id
+     * @param estadistica
+     * @return
+     */
     @PutMapping("/updateEstadistica/{id}")
     public ResponseEntity<?> updateEstadistica(@PathVariable("id") long id, @RequestBody Estadistica estadistica){
         if(!estadisticaService.existsById(id)){

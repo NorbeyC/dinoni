@@ -34,11 +34,21 @@ public class NpsController {
     @Autowired
     UsuarioService usuarioService;
 
+
+    /**
+     * Metodo que retorna todos los NPS
+     * @return
+     */
     @GetMapping("/allNps")
     public ResponseEntity<List<Nps>> getAllNps(){
         return new ResponseEntity<List<Nps>>(npsService.getAllNps(), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna el NPS por el ID
+     * @param id
+     * @return
+     */
     @GetMapping("/nps/id/{id}")
     public ResponseEntity<?> getNpsById(@PathVariable("id") long id){
         if(!npsService.existsById(id)){
@@ -48,6 +58,11 @@ public class NpsController {
         return new ResponseEntity<>(nps, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que guarda un nuevo NPS
+     * @param nps
+     * @return
+     */
     @PostMapping("/guardarNps")
     public ResponseEntity<?> guardarNps(@RequestBody Nps nps){
         try {
@@ -59,6 +74,11 @@ public class NpsController {
         }
     }
 
+    /**
+     * Metodo que elimina un NPS
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteNps/{id}")
     public ResponseEntity<?> deleteNps(@PathVariable("id") long id){
         if(!npsService.existsById(id)){
@@ -68,6 +88,12 @@ public class NpsController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza un NPS
+     * @param id
+     * @param nps
+     * @return
+     */
     @PutMapping("/updateNps/{id}")
     public ResponseEntity<?> updateNps(@PathVariable("id") long id, @RequestBody Nps nps){
         if(!npsService.existsById(id)){
@@ -77,6 +103,11 @@ public class NpsController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
     
+    /**
+     * Metodo que retorna el ModelAndView de un nuevo NPS
+     * @param name
+     * @return
+     */
     @GetMapping(value = "nuevoNps", params = "name")
     public ModelAndView nuevoNps(@RequestParam("name") String name) {
         ModelAndView mav = new ModelAndView();
@@ -96,12 +127,23 @@ public class NpsController {
         return mav;
     }
 
+    /**
+     * Metodo que guarda un NPS estilo formulario
+     * @param nps
+     * @return
+     */
     @PostMapping("/saveNps")
     public String saveNps(@ModelAttribute("nps") Nps nps){
         npsService.saveNps(nps);
         return "redirect:/tienda/viewProductos";
     }
 
+    /**
+     * Metodo que actualiza un NPS estlilo formulario
+     * @param id
+     * @param nps
+     * @return
+     */
     @PostMapping("/actualizarNps/{id}")
     public String actualizarNps(@PathVariable("id") long id, @ModelAttribute("nps") Nps nps){
         if(!npsService.existsById(id)){
@@ -111,6 +153,11 @@ public class NpsController {
         return "redirect:/tienda/npsManagement";
     }
 
+    /**
+     * Metodo que retorna el ModelAndView de actualizar NPS
+     * @param id
+     * @return
+     */
     @GetMapping("editarNps/{id}")
     public ModelAndView editarNps(@PathVariable("id") long id){
         ModelAndView mav = new ModelAndView();
@@ -120,6 +167,11 @@ public class NpsController {
         return mav;
     }
 
+    /**
+     * Metodo que elimina un NPS desde el Management
+     * @param id
+     * @return
+     */
     @GetMapping("eliminarNps/{id}")
     public String eliminarNps(@PathVariable("id") long id){
         if(npsService.existsById(id)){
@@ -128,6 +180,10 @@ public class NpsController {
         return "redirect:/tienda/npsManagement";
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del NpsManagement
+     * @return
+     */
     @GetMapping("/npsManagement")
     public ModelAndView npsManagement(){
         ModelAndView mav = new ModelAndView();

@@ -35,11 +35,20 @@ public class ResenaController {
     @Autowired
     UsuarioService usuarioService;
 
+    /**
+     * Metodo que retorna todas las Resenas en formato JSON
+     * @return
+     */
     @GetMapping("/allResenas")
     public ResponseEntity<List<Resena>> getAllResenas(){
         return new ResponseEntity<List<Resena>>(resenaService.getAllResenas(), HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna una resena por su ID
+     * @param id
+     * @return
+     */
     @GetMapping("/resenas/id/{id}")
     public ResponseEntity<?> getResenaById(@PathVariable("id") long id){
         if(!resenaService.existsById(id)){
@@ -49,6 +58,11 @@ public class ResenaController {
         return new ResponseEntity<>(resena, HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que guarda una nueva resena
+     * @param resena
+     * @return
+     */
     @PostMapping("/saveResena")
     public ResponseEntity<?> saveResena(@RequestBody Resena resena){
         try {
@@ -60,6 +74,11 @@ public class ResenaController {
         }
     }
 
+    /**
+     * Metodo que elimina una resena
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteResena/{id}")
     public ResponseEntity<?> deleteResena(@PathVariable("id") long id){
         if(!resenaService.existsById(id)){
@@ -69,6 +88,12 @@ public class ResenaController {
         return new ResponseEntity<>("Se ha eliminado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que actualiza una resena
+     * @param id
+     * @param resena
+     * @return
+     */
     @PutMapping("/updateResena/{id}")
     public ResponseEntity<?> updateResena(@PathVariable("id") long id, @RequestBody Resena resena){
         if(!resenaService.existsById(id)){
@@ -78,6 +103,11 @@ public class ResenaController {
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del formulario de nuevo comentario
+     * @param name
+     * @return
+     */
     @GetMapping(value = "nuevoComentario", params = "name")
     public ModelAndView nuevoComentario(@RequestParam("name") String name) {
         ModelAndView mav = new ModelAndView();
@@ -96,12 +126,23 @@ public class ResenaController {
         return mav;
     }
     
+    /**
+     * Metodo que guarda un nuevo comentario
+     * @param resena
+     * @return
+     */
     @PostMapping("/saveComentario")
     public String saveComentario(@ModelAttribute("resena") Resena resena){
         resenaService.saveResena(resena);
         return "redirect:/tienda/viewProductos";
     }
 
+    /**
+     * Metodo que actualiza un comentario
+     * @param id
+     * @param resena
+     * @return
+     */
     @PostMapping("/actualizarComentario/{id}")
     public String actualizarComentario(@PathVariable("id") long id, @ModelAttribute("resena") Resena resena){
         if(!resenaService.existsById(id)){
@@ -111,6 +152,11 @@ public class ResenaController {
         return "redirect:/tienda/comentariosManagement";
     }
 
+    /**
+     * Metodo que retorna el ModelAndView del formulario para editar un comentario
+     * @param id
+     * @return
+     */
     @GetMapping("/editarComentario/{id}")
     public ModelAndView editarComentario(@PathVariable("id") long id){
         ModelAndView mav = new ModelAndView();
@@ -120,6 +166,11 @@ public class ResenaController {
         return mav;
     }
 
+    /**
+     * Metodo que elimina un comentario desde el Management
+     * @param id
+     * @return
+     */
     @GetMapping("/eliminarComentario/{id}")
     public String eliminarComentario(@PathVariable("id") long id){
         if(resenaService.existsById(id)){
@@ -128,6 +179,10 @@ public class ResenaController {
         return "redirect:/tienda/comentariosManagement";
     }
     
+    /**
+     * Metodo que retorna el Management de comentarios
+     * @return
+     */
     @GetMapping("/comentariosManagement")
     public ModelAndView comentariosManagement(){
         ModelAndView mav = new ModelAndView();
