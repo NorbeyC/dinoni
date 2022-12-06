@@ -141,6 +141,25 @@
                             });
                         </script>
                     </div>
+                    <div class="estadisticas">
+                        <div class="est">
+                            <b><p style="font-size: small;">Vendidos</p></b>
+                            <b><p id="vendidos" ></p></b>
+                            <script type="text/javascript" th:inline="javascript">
+                                setInterval(ventas, 1000);
+                                function ventas(){
+                                    var number = 0;
+                                    /*<![CDATA[*/
+                                        /*[# th:each="est : ${estadisticas}"]*/
+                                        var v = /*[[${est.ventas}]]*/ 0;  
+                                            number = number + v;                                       
+                                        /*[/]*/               
+                                    /*]]>*/
+                                    document.getElementById("vendidos").innerHTML = number;
+                                }
+                            </script>
+                        </div>
+                    </div>
                     <div class="coms" >
                         <div class="res">
                             <div class="infoResenas" th:each="resena : ${resenas}">

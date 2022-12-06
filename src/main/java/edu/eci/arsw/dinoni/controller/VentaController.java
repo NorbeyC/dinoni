@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.eci.arsw.dinoni.service.EstadisticaService;
 import edu.eci.arsw.dinoni.service.ProductoService;
 import edu.eci.arsw.dinoni.service.VentaService;
 import edu.eci.arsw.dinoni.model.Producto;
@@ -30,6 +31,9 @@ public class VentaController {
 
     @Autowired
     ProductoService productoService;
+
+    @Autowired
+    EstadisticaService estadisticaService;
 
     /**
      * Metodo que retorna todas las ventas
@@ -121,6 +125,7 @@ public class VentaController {
                 }
                 else{
                     producto.compra(cantidad);
+                    estadisticaService.nuevaEstadistica(name, cantidad);
                 }
                 productoService.updateProducto(producto.getId(), producto);
                 mav.addObject("producto", producto);

@@ -74,6 +74,16 @@ public class EstadisticaService {
     }
 
     /**
+     * Metodo que guarda una estadistica sin recibir id
+     * @param producto
+     * @param ventas
+     */
+    public void nuevaEstadistica(String producto, int ventas){
+        Estadistica estadistica = new Estadistica(producto, ventas);
+        estadisticaRepository.save(estadistica);
+    }
+
+    /**
      * Metodo que elimina una estadistica por su id
      * @param id
      */
