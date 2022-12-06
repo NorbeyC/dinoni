@@ -9,11 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/compra.css"/>
     <link rel="icon" href="/img/icono.ico" />
-    <script type="text/javascript">
-        function popUp(URL) {
-            window.open(URL, 'Success Popup', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=300,height=200,left = 390,top = 50');
-        }
-    </script>
 </head>
 <body>
     <div class="header">
@@ -46,31 +41,24 @@
                     <p th:text="${producto.descripcion}"></p>
                     <div style="display: flex;">
                         <b><p style="font-size: small;">COP$</p></b>
-                        <b><p th:text="${producto.precio}"></p></b>
+                        <b><p id="total" th:text="${producto.precio}"></p></b>
+                    </div>
+                    <div style="display: flex;">
+                        <b><p id="total" style="font-size: small;"></p></b>
                     </div>
                     <div style="display: flex;">
                         <p style="font-size: small;">Estado: </p>
                         <p th:text="${producto.estado}" style="color:#ff7b5b; font-size: small;"></p>
                     </div>
                 </div>
-                <div class="añadir">
-                    <select name="cantidad" id="cantidad">
-                        <option value=1>1</option>
-                        <option value=2>2</option>
-                        <option value=3>3</option>
-                        <option value=4>4</option>
-                        <option value=5>5</option>
-                    </select>                        
-                    <p id = "limit"></p>
+                <div class="añadir">                                       
+                    <p id="cantidad" style="font-size: small;"></p>
                     <script type="text/javascript" th:inline="javascript">
-                        const x = document.querySelector('#cantidad');
-                        x.addEventListener('change', (event) =>{
-                            let mensaje = document.querySelector('#limit');
-                            var limite = /*[[${producto.cantidad}]]*/ 'Cantidad';
-                            if(x.value > limite){
-                                mensaje.innerHTML = "Solo quedan " + limite + " unidades disponibles";
-                            }
-                        });
+                        let total = document.querySelector('#total');
+                        var numero= /*[[${cantidad}]]*/ 'Cantidad';
+                        let cantidad = document.querySelector('#cantidad');
+                        cantidad.innerHTML = "Cantidad: " + numero;
+                        total.innerHTML = numero * /*[[${producto.precio}]]*/ 'Precio';
                     </script>
                 </div>
                 <div class="envio">
@@ -150,39 +138,7 @@
                         </div>             
                         <br>
                         <div class="comprar">
-                            <button id="open"  class="btn btn-success">Finalizar Compra</button>
-                        </div>
-                        <div th:each="producto : ${producto}">
-                        <dialog id="modal_container" class="modal-container">
-                              <h1>Compra exitosa!</h1>
-                            <div class="infp">
-                                <img th:src="${producto.imagen}" style="width: 100px; height: 120px;">
-                                <div style="padding: 8px;">
-                                    <p th:text="${usuario.nombre}" style="font-size: small;"></p>
-                                    <b><p th:text="${producto.nombre}"></p></b>
-                                    <div style="display: flex;">
-                                        <b><p style="font-size: small;">COP$</p></b>
-                                        <b><p th:text="${producto.precio}"></p></b>
-                                    </div>
-                                </div>
-                            </div>
-                              <button id="close" class="btn btn-success">Cerrar</button>
-                            
-                        </dialog>
-                        <script>
-                            const open = document.querySelector("#open");
-                            const modal = document.querySelector("#modal_container");
-                            const close = document.querySelector('#close');
-
-                            open.addEventListener('click', () => {
-                            modal_container.showModal();  
-                            });
-
-                            close.addEventListener('click', () => {
-                            modal_container.close();
-
-                            });
-                        </script>
+                            <a id="enlace" href="venta" th:href="@{venta(name=${producto.nombre},cantidad=${cantidad})}" class="btn btn-dark"> Finalizar Compra</a>
                         </div>
                     </div>
                 </form>

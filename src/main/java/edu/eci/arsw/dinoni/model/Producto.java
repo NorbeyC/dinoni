@@ -106,6 +106,32 @@ public class Producto{
         this.cantidad = cantidad;
     }
 
+    /**
+     * Verifica si el producto esta disponible o no
+     * @return
+     */
+    public boolean isDisponible() {
+        if(this.getCantidad() > 0 && this.getEstado() == 'D'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Realiza la compra de un producto
+     * @param cantidad
+     */
+    public void compra(int cantidad){
+        if((this.getCantidad() - cantidad) >= 0){
+            this.setCantidad(this.getCantidad() - cantidad);
+        }
+        else{
+            this.setCantidad(0);
+        }
+    }
+
     public String getCategoria() {
         return this.categoria;
     }

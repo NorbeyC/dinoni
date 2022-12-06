@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import edu.eci.arsw.dinoni.service.ProductoService;
 import edu.eci.arsw.dinoni.service.VentaService;
+import edu.eci.arsw.dinoni.model.Producto;
 import edu.eci.arsw.dinoni.model.Venta;
 
 @Controller
@@ -23,6 +27,9 @@ public class VentaController {
     
     @Autowired
     VentaService ventaService;
+
+    @Autowired
+    ProductoService productoService;
 
     /**
      * Metodo que retorna todas las ventas
@@ -91,5 +98,38 @@ public class VentaController {
         ventaService.updateVenta(id, venta);
         return new ResponseEntity<>("Se ha actualizado correctamente ",HttpStatus.ACCEPTED);
     }
-    
+
+    /**
+     * Metodo que se encarga de la venta de un producto
+     * @param name
+     * @param cantidad
+     * @return
+     */
+    @GetMapping(value="/venta", params={"name","cantidad"})
+    public ModelAndView venta(@RequestParam String name, @RequestParam int cantidad){
+        ModelAndView mav = new ModelAndView();
+        try{
+            if(productoService.existsByNombre(name)){
+                mav.setViewName("venta");
+                Producto producto = productoService.getProductoByNombre(name).get();
+                if(!producto.isDisponible()){
+                    producto.setEstado('N');
+                    mav.setViewName("sinStock");
+                }
+                else if(producto.getCantidad() < cantidad){
+                    mav.setViewName("sinStock");
+                }
+                else{
+                    producto.compra(cantidad);
+                }
+                productoService.updateProducto(producto.getId(), producto);
+                mav.addObject("producto", producto);
+                mav.addObject("cantidad", cantidad);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            mav.setViewName("error");
+        } 
+        return mav;
+    }
 }

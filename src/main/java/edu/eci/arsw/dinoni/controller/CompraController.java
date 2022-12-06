@@ -53,17 +53,23 @@ public class CompraController {
      * @param name
      * @return
      */
-    @GetMapping(value="/compras", params="name")
-    public ModelAndView compras(@RequestParam String name){
+    @GetMapping(value="/compras", params={"name","cantidad"})
+    public ModelAndView compras(@RequestParam String name, @RequestParam int cantidad){
         ModelAndView mav = new ModelAndView();
         try {
             UserDetails UserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             System.out.println(UserDetails.getUsername() + " " + UserDetails.getPassword());
             Usuario usuario = usuarioService.getUsuarioByNombre(UserDetails.getUsername()).get();
             Producto producto = productoService.getProductoByNombre(name).get();
-            mav.setViewName("compras");
-            mav.addObject("producto", producto);
-            mav.addObject("usuario", usuario);
+            if(producto.isDisponible()){
+                mav.setViewName("compras");
+                mav.addObject("producto", producto);
+                mav.addObject("usuario", usuario);
+                mav.addObject("cantidad", cantidad);
+            }
+            else{
+                mav.setViewName("sinStock");
+            }
         } catch (Exception e) {
             System.out.println(e);
             mav.setViewName("error");
