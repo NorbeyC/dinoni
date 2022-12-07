@@ -43,7 +43,6 @@
                 <div class="items-var">
                     <a href="/login"><i class="fa fa-user"></i> Iniciar Sesión</a>
                     <a href="/login.html"><i class="fa fa-user"></i>Registrarse</a>
-                    <a href="#"><i class="fa fa-heart"></i> Carrito</a>
                 </div>
             </div>
         </div>
@@ -52,39 +51,60 @@
             <div class="item" th:each="producto : ${producto}">
                 <div class="imagen">
                     <img th:src="${producto.imagen}" class="imgp">
-                    <div class="wrapper">
-                        <div>
-                            <div class="line"></div>
-                            <div class="number n0">0</div>
-                            <div class="number n25">1.3</div>
-                            <div class="number n90">2.5</div>
-                            <div class="number n75">3.8</div>
-                            <div class="number n180">5.0</div>
-                            <div class="circle2"></div>
-                            <div class="circle1"></div>
+                    <div class="venAndNps">
+                        <div class="estadisticas">
+                            <div class="est" style="display:flex; margin-left: 30%;">
+                                <b><p style="font-size: small;">Vendidos: </p></b>
+                                <b><p id="vendidos" ></p></b>
+                                <script type="text/javascript" th:inline="javascript">
+                                    setInterval(ventas, 1000);
+                                    function ventas(){
+                                        var number = 0;
+                                        /*<![CDATA[*/
+                                            /*[# th:each="est : ${estadisticas}"]*/
+                                            var v = /*[[${est.ventas}]]*/ 0;  
+                                                number = number + v;                                       
+                                            /*[/]*/               
+                                        /*]]>*/
+                                        document.getElementById("vendidos").innerHTML = number;
+                                    }
+                                </script>
+                            </div>
                         </div>
-                        <script type="text/javascript" th:inline="javascript"> 
-                            setInterval(moverNumber, 1000);
-                            function moverNumber() {
-                                var number = 0;
-                                var cantidad = 0;
-                                /*<![CDATA[*/
-                                        /*[# th:each="np : ${nps}"]*/
-                                            var nps = /*[[${np.satisfaccion}]]*/ 0;  
-                                            cantidad += 1;
-                                            number = number + nps;                                       
-                                        /*[/]*/               
-                                /*]]>*/
-                                var promedio = number/cantidad;
-                                let perCent=(promedio*100)/5.0;
-                                perCent=perCent<=100?perCent:100;
-                                const result=((perCent*180)/100)+90;
-                                const line = document.querySelector('.line');
-                                line.style.transform = `rotate(${result}deg)`;
-                            };
-                        </script>
-                        <br>
-                        <a href="nuevoNps" th:href="@{nuevoNps(name=${producto.nombre})}" class="btn btn-dark">Nueva Calificacion</a>
+                        <div class="wrapper">
+                            <div>
+                                <div class="line"></div>
+                                <div class="number n0">0</div>
+                                <div class="number n25">1.3</div>
+                                <div class="number n90">2.5</div>
+                                <div class="number n75">3.8</div>
+                                <div class="number n180">5.0</div>
+                                <div class="circle2"></div>
+                                <div class="circle1"></div>
+                            </div>
+                            <script type="text/javascript" th:inline="javascript"> 
+                                setInterval(moverNumber, 1000);
+                                function moverNumber() {
+                                    var number = 0;
+                                    var cantidad = 0;
+                                    /*<![CDATA[*/
+                                            /*[# th:each="np : ${nps}"]*/
+                                                var nps = /*[[${np.satisfaccion}]]*/ 0;  
+                                                cantidad += 1;
+                                                number = number + nps;                                       
+                                            /*[/]*/               
+                                    /*]]>*/
+                                    var promedio = number/cantidad;
+                                    let perCent=(promedio*100)/5.0;
+                                    perCent=perCent<=100?perCent:100;
+                                    const result=((perCent*180)/100)+90;
+                                    const line = document.querySelector('.line');
+                                    line.style.transform = `rotate(${result}deg)`;
+                                };
+                            </script>
+                            <br>
+                            <a href="nuevoNps" th:href="@{nuevoNps(name=${producto.nombre})}" class="btn btn-dark">Nueva Calificacion</a>
+                        </div>
                     </div>
                 </div>
                 <div class="infop">
@@ -141,25 +161,7 @@
                             });
                         </script>
                     </div>
-                    <div class="estadisticas">
-                        <div class="est">
-                            <b><p style="font-size: small;">Vendidos</p></b>
-                            <b><p id="vendidos" ></p></b>
-                            <script type="text/javascript" th:inline="javascript">
-                                setInterval(ventas, 1000);
-                                function ventas(){
-                                    var number = 0;
-                                    /*<![CDATA[*/
-                                        /*[# th:each="est : ${estadisticas}"]*/
-                                        var v = /*[[${est.ventas}]]*/ 0;  
-                                            number = number + v;                                       
-                                        /*[/]*/               
-                                    /*]]>*/
-                                    document.getElementById("vendidos").innerHTML = number;
-                                }
-                            </script>
-                        </div>
-                    </div>
+                    
                     <div class="coms" >
                         <div class="res">
                             <div class="infoResenas" th:each="resena : ${resenas}">
@@ -169,7 +171,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="insertCom">
+                        <div class="insertCom" style="text-align: center;">
                             <form id="insertRes">
                                 <a href="nuevoComentario" th:href="@{nuevoComentario(name=${producto.nombre})}" class="btn btn-dark">Nuevo Comentario</a>
                             </form>
